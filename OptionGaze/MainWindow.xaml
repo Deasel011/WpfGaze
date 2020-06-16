@@ -1,0 +1,31 @@
+﻿<Window x:Class="OptionGaze.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OptionGaze"
+        xmlns:converters="clr-namespace:OptionGaze.Converters"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="800"
+        d:DataContext="{d:DesignInstance Type={x:Type local:GazerVM}}">
+    <Window.Resources>
+        <converters:BoolToStatusColorConverter x:Key="BoolToStatusColorConverter"/>
+    </Window.Resources>
+    <Grid>
+        <TabControl>
+            <TabItem Header="Account">
+                <StackPanel HorizontalAlignment="Left">
+                    <Label>Log in with your accounts:</Label>
+                    <Button Click="QuestradeLoginButtonClick"> Questrade </Button>
+                    <TextBox Background="{Binding QuestradeAccountManager.IsConnected, Converter={StaticResource BoolToStatusColorConverter}}" IsReadOnly="True"></TextBox>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Stock" IsEnabled="False">
+                <Label>Stocks Content</Label>
+            </TabItem>
+            <TabItem Header="Option" IsEnabled="{Binding QuestradeAccountManager.IsConnected}">
+                <Label>Options Content</Label>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
