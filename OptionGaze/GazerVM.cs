@@ -17,7 +17,6 @@ namespace OptionGaze
         public GazerVM()
         {
             QuestradeAccountManager = new QuestradeAccountManager();
-            // QuestradeAccountManager.PropertyChanged += QuestradeAccountManagerOnPropertyChanged;
         }
 
         public QuestradeAccountManager QuestradeAccountManager
@@ -34,16 +33,6 @@ namespace OptionGaze
                 m_questradeAccountManager = value;
             }
         }
-
-        // private void QuestradeAccountManagerOnPropertyChanged(object sender, PropertyChangedEventArgs e)
-        // {
-        //     RaisePropertyChanged(nameof(QuestradeAccountManager));
-        // }
-        //
-        // public void Dispose()
-        // {
-        //     QuestradeAccountManager.PropertyChanged -= QuestradeAccountManagerOnPropertyChanged;
-        // }
 
         public void Initialize()
         {
