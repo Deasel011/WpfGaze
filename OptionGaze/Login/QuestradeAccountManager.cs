@@ -1,7 +1,6 @@
 ﻿//  ==========================================================================
-//  Copyright (C) 2020 by Genetec, Inc.
-//  All rights reserved.
-//  May be used only in accordance with a valid Source Code License Agreement.
+//   Code created by Philippe Deslongchamps.
+//   For the Stockgaze project.
 //  ==========================================================================
 
 using System;
@@ -11,20 +10,39 @@ using QuestradeAPI;
 namespace OptionGaze.Login
 {
 
-    public class QuestradeAccountManager: BindableBase
+    public class QuestradeAccountManager : BindableBase
     {
 
         private AuthenticationInfoImplementation m_authInfo;
 
+        public string AccessToken => AuthInfo.AccessToken;
+
+        public bool IsConnected => AuthInfo?.IsAuthenticated ?? false;
+
+        private AuthenticationInfoImplementation AuthInfo
+        {
+            get => m_authInfo;
+            set
+            {
+                if (m_authInfo == value)
+                {
+                    return;
+                }
+
+                m_authInfo = value;
+                RaisePropertyChanged(nameof(IsConnected));
+            }
+        }
+
         public bool TryRefreshAuth()
         {
             var config = new QuestradeAccountConfigFile();
-            
+
             if (!config.FileExist)
             {
                 return false;
             }
-            
+
             config.Load();
             if (!string.IsNullOrEmpty(config.AccessToken) && !string.IsNullOrEmpty(config.RefreshToken) &&
                 AuthAgent.GetInstance().Authenticate(config.RefreshToken, config.IsDemo) is AuthenticationInfoImplementation success && success.IsAuthenticated)
@@ -37,30 +55,12 @@ namespace OptionGaze.Login
             return false;
         }
 
-        private AuthenticationInfoImplementation AuthInfo
-        {
-            get => m_authInfo;
-            set
-            {
-                if (m_authInfo == value)
-                {
-                    return;
-                }
-                m_authInfo = value;
-                RaisePropertyChanged(nameof(IsConnected));
-            }
-        }
-
-        public string AccessToken => AuthInfo.AccessToken;
-
-        public bool IsConnected => AuthInfo?.IsAuthenticated ?? false;
-        
         public void Login(string token, bool isDemo = true)
         {
-            QuestradeAccountConfigFile questradeAccountConfigFile = new QuestradeAccountConfigFile();
+            var questradeAccountConfigFile = new QuestradeAccountConfigFile();
             questradeAccountConfigFile.Load();
             questradeAccountConfigFile.RefreshToken = token;
-            
+
             var success = AuthAgent.GetInstance().Authenticate(token, isDemo);
             if (!success.IsValid)
             {

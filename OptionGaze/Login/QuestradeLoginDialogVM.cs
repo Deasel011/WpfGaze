@@ -1,16 +1,21 @@
-﻿using Prism.Mvvm;
+﻿//  ==========================================================================
+//   Code created by Philippe Deslongchamps.
+//   For the Stockgaze project.
+//  ==========================================================================
+
+using Prism.Mvvm;
 
 namespace OptionGaze.Login
 {
 
-    public class QuestradeLoginDialogVM: BindableBase
+    public class QuestradeLoginDialogVM : BindableBase
     {
 
-        private string m_refreshToken = PlaceholderValue;
+        public const string PlaceholderValue = "paste refresh token in here";
 
         private bool m_isDemo;
 
-        public const string PlaceholderValue = "paste refresh token in here";
+        private string m_refreshToken = PlaceholderValue;
 
         public bool IsDemo
         {
@@ -21,6 +26,7 @@ namespace OptionGaze.Login
                 {
                     return;
                 }
+
                 RaisePropertyChanged(nameof(IsDemo));
                 m_isDemo = value;
             }
@@ -35,7 +41,7 @@ namespace OptionGaze.Login
                 {
                     return;
                 }
-                
+
                 RaisePropertyChanged(nameof(RefreshToken));
                 m_refreshToken = value;
             }

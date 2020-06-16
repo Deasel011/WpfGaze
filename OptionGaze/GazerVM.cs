@@ -1,12 +1,15 @@
-﻿using System;
-using System.ComponentModel;
+﻿//  ==========================================================================
+//   Code created by Philippe Deslongchamps.
+//   For the Stockgaze project.
+//  ==========================================================================
+
 using OptionGaze.Login;
 using Prism.Mvvm;
 
 namespace OptionGaze
 {
 
-    public class GazerVM : BindableBase//, IDisposable
+    public class GazerVM : BindableBase //, IDisposable
     {
 
         private QuestradeAccountManager m_questradeAccountManager;
@@ -15,6 +18,21 @@ namespace OptionGaze
         {
             QuestradeAccountManager = new QuestradeAccountManager();
             // QuestradeAccountManager.PropertyChanged += QuestradeAccountManagerOnPropertyChanged;
+        }
+
+        public QuestradeAccountManager QuestradeAccountManager
+        {
+            get => m_questradeAccountManager;
+            set
+            {
+                if (m_questradeAccountManager == value)
+                {
+                    return;
+                }
+
+                RaisePropertyChanged(nameof(QuestradeAccountManager));
+                m_questradeAccountManager = value;
+            }
         }
 
         // private void QuestradeAccountManagerOnPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -30,20 +48,6 @@ namespace OptionGaze
         public void Initialize()
         {
             QuestradeAccountManager.TryRefreshAuth();
-        }
-
-        public QuestradeAccountManager QuestradeAccountManager
-        {
-            get => m_questradeAccountManager;
-            set
-            {
-                if (m_questradeAccountManager == value)
-                {
-                    return;
-                }
-                RaisePropertyChanged(nameof(QuestradeAccountManager));
-                m_questradeAccountManager = value;
-            }
         }
 
     }

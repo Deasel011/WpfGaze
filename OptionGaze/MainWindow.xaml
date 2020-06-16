@@ -9,7 +9,7 @@
         Title="MainWindow" Height="500" Width="800"
         d:DataContext="{d:DesignInstance Type={x:Type local:GazerVM}}">
     <Window.Resources>
-        <converters:BoolToStatusColorConverter x:Key="BoolToStatusColorConverter"/>
+        <converters:BoolToStatusColorConverter x:Key="BoolToStatusColorConverter" />
     </Window.Resources>
     <Grid>
         <TabControl>
@@ -17,7 +17,9 @@
                 <StackPanel HorizontalAlignment="Left">
                     <Label>Log in with your accounts:</Label>
                     <Button Click="QuestradeLoginButtonClick"> Questrade </Button>
-                    <TextBox Background="{Binding QuestradeAccountManager.IsConnected, Converter={StaticResource BoolToStatusColorConverter}}" IsReadOnly="True"></TextBox>
+                    <TextBox
+                        Background="{Binding QuestradeAccountManager.IsConnected, Converter={StaticResource BoolToStatusColorConverter}}"
+                        IsReadOnly="True" />
                 </StackPanel>
             </TabItem>
             <TabItem Header="Stock" IsEnabled="False">

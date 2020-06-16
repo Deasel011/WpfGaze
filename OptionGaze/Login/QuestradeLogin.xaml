@@ -10,18 +10,18 @@
         d:DataContext="{d:DesignInstance Type={x:Type login:QuestradeLoginDialogVM}}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Label Grid.Row="0" Grid.Column="0">Refresh Token : </Label>
-        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding RefreshToken}" Width="250" Name="RefreshToken"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding RefreshToken}" Width="250" Name="RefreshToken" />
         <Label Grid.Row="1" Grid.Column="0">Is Demo account : </Label>
-        <CheckBox Grid.Row="1" Grid.Column="1" Name="IsDemoChecked" IsChecked="{Binding IsDemo}"/>
+        <CheckBox Grid.Row="1" Grid.Column="1" Name="IsDemoChecked" IsChecked="{Binding IsDemo}" />
         <Button Grid.Row="2" Grid.Column="0" Click="ButtonBase_OnClick">Ok</Button>
     </Grid>
 </Window>

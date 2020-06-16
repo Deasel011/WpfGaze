@@ -1,7 +1,6 @@
 ﻿//  ==========================================================================
-//  Copyright (C) 2020 by Genetec, Inc.
-//  All rights reserved.
-//  May be used only in accordance with a valid Source Code License Agreement.
+//   Code created by Philippe Deslongchamps.
+//   For the Stockgaze project.
 //  ==========================================================================
 
 using System;
@@ -15,9 +14,9 @@ namespace OptionGaze
     public abstract class ConfigFile
     {
 
-        public bool FileExist => Directory.Exists(Path) && File.Exists(System.IO.Path.Combine(Path, m_filename));
-        
         private readonly string m_filename = $"{nameof(ConfigFile)}.json";
+
+        public bool FileExist => Directory.Exists(Path) && File.Exists(System.IO.Path.Combine(Path, m_filename));
 
         private string Path => System.IO.Path.Combine(Environment.CurrentDirectory, "ConfigFiles");
 

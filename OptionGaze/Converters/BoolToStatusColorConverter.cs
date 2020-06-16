@@ -1,7 +1,6 @@
 ﻿//  ==========================================================================
-//  Copyright (C) 2020 by Genetec, Inc.
-//  All rights reserved.
-//  May be used only in accordance with a valid Source Code License Agreement.
+//   Code created by Philippe Deslongchamps.
+//   For the Stockgaze project.
 //  ==========================================================================
 
 using System;
@@ -12,8 +11,8 @@ using System.Windows.Media;
 namespace OptionGaze.Converters
 {
 
-    [ValueConversion(typeof(Boolean),typeof(SolidColorBrush))]
-    public class BoolToStatusColorConverter: IValueConverter
+    [ValueConversion(typeof(bool), typeof(SolidColorBrush))]
+    public class BoolToStatusColorConverter : IValueConverter
     {
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
