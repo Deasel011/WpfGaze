@@ -2,7 +2,6 @@
 //   Code created by Philippe Deslongchamps.
 //   For the Stockgaze project.
 //  ==========================================================================
-
 using System.Windows;
 using OptionGaze.Login;
 
@@ -15,11 +14,14 @@ namespace OptionGaze
     public partial class MainWindow
     {
 
+        private readonly GazerVM m_gazerVm;
+
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new GazerVM();
-            ((GazerVM)DataContext).Initialize();
+            m_gazerVm = new GazerVM();
+            DataContext = m_gazerVm;
+            m_gazerVm.Initialize();
         }
 
         private void QuestradeLoginButtonClick(object sender, RoutedEventArgs e)
@@ -31,6 +33,15 @@ namespace OptionGaze
                 var refreshToken = dialog.ResponseText;
                 var isDemo = dialog.IsDemo;
                 ((GazerVM)DataContext).QuestradeAccountManager.Login(refreshToken, isDemo);
+            }
+        }
+
+        private async void QuestradeSymbolsRefreshButtonClick(object sender, RoutedEventArgs e)
+        {
+            var res = MessageBox.Show("Are you sure you want to refresh the symbols, this operation can take a few minutes.");
+            if (res == MessageBoxResult.OK)
+            {
+                await m_gazerVm.QuestradeSymbolsManager.Refresh();
             }
         }
 

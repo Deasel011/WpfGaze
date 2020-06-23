@@ -5,18 +5,21 @@
 using System;
 using System.Globalization;
 using System.Windows.Data;
-using System.Windows.Media;
 
 namespace OptionGaze.Converters
 {
 
-    [ValueConversion(typeof(bool), typeof(SolidColorBrush))]
-    public class BoolToStatusColorConverter : IValueConverter
+    public class NotBooleanConverter : IValueConverter
     {
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value != null && (bool)value ? new SolidColorBrush(Colors.Green) : new SolidColorBrush(Colors.Red);
+            if (targetType != typeof(bool))
+            {
+                throw new InvalidOperationException("The target must be a boolean");
+            }
+
+            return !(bool)value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

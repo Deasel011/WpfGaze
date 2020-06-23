@@ -5,11 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OptionGaze"
         xmlns:converters="clr-namespace:OptionGaze.Converters"
+        xmlns:option="clr-namespace:OptionGaze.Option"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="800"
+        Title="MainWindow"
+        d:DesignHeight="500" d:DesignWidth="800"
         d:DataContext="{d:DesignInstance Type={x:Type local:GazerVM}}">
     <Window.Resources>
         <converters:BoolToStatusColorConverter x:Key="BoolToStatusColorConverter" />
+        <converters:NotBooleanConverter x:Key="NotBooleanConverter" />
     </Window.Resources>
     <Grid>
         <TabControl>
@@ -20,13 +23,21 @@
                     <TextBox
                         Background="{Binding QuestradeAccountManager.IsConnected, Converter={StaticResource BoolToStatusColorConverter}}"
                         IsReadOnly="True" />
+                    <Button
+                        IsEnabled="{Binding QuestradeSymbolsManager.IsRefreshing, Converter={StaticResource NotBooleanConverter}}"
+                        Click="QuestradeSymbolsRefreshButtonClick">
+                        Refresh Symbols
+                    </Button>
+                    <TextBox
+                        Background="{Binding QuestradeSymbolsAreUpdated, Converter={StaticResource BoolToStatusColorConverter}}"
+                        IsReadOnly="True" />
                 </StackPanel>
             </TabItem>
             <TabItem Header="Stock" IsEnabled="False">
                 <Label>Stocks Content</Label>
             </TabItem>
             <TabItem Header="Option" IsEnabled="{Binding QuestradeAccountManager.IsConnected}">
-                <Label>Options Content</Label>
+                <option:OptionsUserControl />
             </TabItem>
         </TabControl>
     </Grid>

@@ -19,7 +19,7 @@
         <DebugSymbols>true</DebugSymbols>
         <DebugType>full</DebugType>
         <Optimize>false</Optimize>
-        <OutputPath>bin\Debug\</OutputPath>
+        <OutputPath>..\bin\Debug\</OutputPath>
         <DefineConstants>DEBUG;TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
@@ -28,7 +28,7 @@
         <PlatformTarget>AnyCPU</PlatformTarget>
         <DebugType>pdbonly</DebugType>
         <Optimize>true</Optimize>
-        <OutputPath>bin\Release\</OutputPath>
+        <OutputPath>..\bin\Release\</OutputPath>
         <DefineConstants>TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
@@ -82,12 +82,18 @@
         </ApplicationDefinition>
         <Compile Include="ConfigFile.cs" />
         <Compile Include="Converters\BoolToStatusColorConverter.cs" />
+        <Compile Include="Converters\NotBooleanConverter.cs" />
         <Compile Include="GazerVM.cs" />
         <Compile Include="Login\QuestradeAccountConfigFile.cs" />
         <Compile Include="Login\QuestradeAccountManager.cs" />
         <Compile Include="Login\QuestradeLogin.xaml.cs">
           <DependentUpon>QuestradeLogin.xaml</DependentUpon>
         </Compile>
+        <Compile Include="Models\SymbolModel.cs" />
+        <Compile Include="Symbols\QuestradeSymbolsManager.cs" />
+        <Compile Include="Repositories\QuestradeSymbolsConfig.cs" />
+        <Compile Include="Services\SearchService.cs" />
+        <Compile Include="WPFTools\BindableCollection.cs" />
         <Page Include="Login\QuestradeLogin.xaml" />
         <Page Include="MainWindow.xaml">
             <Generator>MSBuild:Compile</Generator>
@@ -102,8 +108,13 @@
             <DependentUpon>MainWindow.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
+        <Page Include="Option\OptionsUserControl.xaml" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Option\OptionsUCVM.cs" />
+        <Compile Include="Option\OptionsUserControl.xaml.cs">
+          <DependentUpon>OptionsUserControl.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Properties\AssemblyInfo.cs">
             <SubType>Code</SubType>
         </Compile>

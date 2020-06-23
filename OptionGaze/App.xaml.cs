@@ -2,7 +2,6 @@
 //   Code created by Philippe Deslongchamps.
 //   For the Stockgaze project.
 //  ==========================================================================
-
 namespace OptionGaze
 {
 

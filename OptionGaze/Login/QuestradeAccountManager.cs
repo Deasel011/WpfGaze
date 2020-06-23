@@ -2,7 +2,6 @@
 //   Code created by Philippe Deslongchamps.
 //   For the Stockgaze project.
 //  ==========================================================================
-
 using System;
 using Prism.Mvvm;
 using QuestradeAPI;
@@ -19,17 +18,15 @@ namespace OptionGaze.Login
 
         public bool IsConnected => AuthInfo?.IsAuthenticated ?? false;
 
+        public AuthenticationInfoImplementation GetAuthInfo => AuthInfo;
+
         private AuthenticationInfoImplementation AuthInfo
         {
             get => m_authInfo;
             set
-            {
-                if (m_authInfo == value)
-                {
-                    return;
-                }
 
-                m_authInfo = value;
+            {
+                SetProperty(ref m_authInfo, value);
                 RaisePropertyChanged(nameof(IsConnected));
             }
         }

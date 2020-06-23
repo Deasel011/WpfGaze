@@ -2,7 +2,6 @@
 //   Code created by Philippe Deslongchamps.
 //   For the Stockgaze project.
 //  ==========================================================================
-
 using System.Security.Cryptography;
 using System.Text;
 using Newtonsoft.Json;
@@ -35,6 +34,11 @@ namespace OptionGaze.Login
 
         [JsonProperty(nameof(RefreshToken))]
         private byte[] ProtectedRefreshToken { get; set; }
+
+        public QuestradeAccountConfigFile()
+        {
+            Filename = $"{nameof(QuestradeAccountConfigFile)}.json";
+        }
 
     }
 

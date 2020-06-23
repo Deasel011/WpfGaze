@@ -2,7 +2,6 @@
 //   Code created by Philippe Deslongchamps.
 //   For the Stockgaze project.
 //  ==========================================================================
-
 using Prism.Mvvm;
 
 namespace OptionGaze.Login
@@ -20,31 +19,13 @@ namespace OptionGaze.Login
         public bool IsDemo
         {
             get => m_isDemo;
-            set
-            {
-                if (m_isDemo == value)
-                {
-                    return;
-                }
-
-                RaisePropertyChanged(nameof(IsDemo));
-                m_isDemo = value;
-            }
+            set => SetProperty(ref m_isDemo, value);
         }
 
         public string RefreshToken
         {
             get => m_refreshToken;
-            set
-            {
-                if (m_refreshToken == value)
-                {
-                    return;
-                }
-
-                RaisePropertyChanged(nameof(RefreshToken));
-                m_refreshToken = value;
-            }
+            set => SetProperty(ref m_refreshToken, value);
         }
 
     }
