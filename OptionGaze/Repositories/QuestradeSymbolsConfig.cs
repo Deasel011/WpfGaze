@@ -51,6 +51,8 @@ namespace OptionGaze.Repositories
 
             var symbols = await m_searchService.Search(string.Empty);
             QuestradeEquitySymbols = new List<EquitySymbol>(symbols.Where(s => s.m_isQuotable && s.m_isTradable));
+            LastUpdated = DateTime.Now;
+            await Save();
         }
 
         public void AffectSearchService(SearchService searchService)

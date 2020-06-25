@@ -50,7 +50,7 @@ namespace OptionGaze
             if (GetQuestradeAccountManager().TryRefreshAuth())
             {
                 QuestradeSymbolsManager.AffectSearchService(new SearchService(QuestradeAccountManager));
-                QuestradeSymbolsAreUpdated = QuestradeSymbolsManager.LastUpdated.AddDays(14) < DateTime.Now;
+                QuestradeSymbolsAreUpdated = QuestradeSymbolsManager.LastUpdated.AddDays(14) > DateTime.Now;
             }
         }
 

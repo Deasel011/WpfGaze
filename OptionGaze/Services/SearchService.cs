@@ -41,13 +41,18 @@ namespace OptionGaze.Services
             tasks = new List<Task>();
             var requestId = GetNextRequestId;
             ulong offset = 0;
-            await SearchPage(searchString, offset, requestId);
+            while (await SearchPage(searchString, offset, requestId))
+            {
+                offset += Convert.ToUInt64(20);
+            }
+            
+            
             return m_results;
         }
 
-        private Task SearchPage(string searchString, ulong offset, int requestId)
+        private Task<bool> SearchPage(string searchString, ulong offset, int requestId)
         {
-            var tcs = new TaskCompletionSource<List<EquitySymbol>>();
+            var tcs = new TaskCompletionSource<bool>();
             SearchSymbolsResponse.BeginSearchSymbols(
                 m_qam.GetAuthInfo,
                 async response =>
@@ -56,14 +61,15 @@ namespace OptionGaze.Services
                     var res = response.AsyncState as SearchSymbolsResponse;
                     if (res.Symbols.Count == 0)
                     {
-                        tcs.SetResult(m_results);
+                        tcs.SetResult(false);
                     }
-
-                    m_results.AddRange(res.Symbols);
-                    offset += Convert.ToUInt64(res.Symbols.Count);
-                    await Task.Delay(TimeSpan.FromMilliseconds(125));
-                    await SearchPage(searchString, offset, requestId);
-                    tcs.SetResult(m_results);
+                    else
+                    {
+                        m_results.AddRange(res.Symbols);
+                    
+                        await Task.Delay(TimeSpan.FromMilliseconds(50));
+                        tcs.SetResult(true);
+                    }
                 },
                 requestId,
                 searchString,
