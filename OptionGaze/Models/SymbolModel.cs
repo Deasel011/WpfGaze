@@ -19,6 +19,10 @@ namespace OptionGaze.Option
 
         private string m_symbol;
 
+        private double m_stockPrice;
+
+        private double m_strikePrice;
+
         public static IEqualityComparer<SymbolModel> QuestradeSymbolIdComparer { get; } = new QuestradeSymbolIdEqualityComparer();
 
         public string Symbol
@@ -44,6 +48,20 @@ namespace OptionGaze.Option
             get => m_questradeSymbolId;
             set => SetProperty(ref m_questradeSymbolId, value);
         }
+
+        public double StockPrice
+        {
+            get => m_stockPrice;
+            set => SetProperty(ref m_stockPrice, value);
+        }
+
+        public double StrikePrice
+        {
+            get => m_strikePrice;
+            set => SetProperty(ref m_strikePrice, value);
+        }
+        
+        
 
         private sealed class QuestradeSymbolIdEqualityComparer : IEqualityComparer<SymbolModel>
         {

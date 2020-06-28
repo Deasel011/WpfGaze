@@ -26,16 +26,16 @@ namespace OptionGaze.Repositories
     public class QuestradeSymbolsConfig : ConfigFile, IQuestradeStockIdRepository
     {
 
-        private SearchService m_searchService;
+        private SymbolSearchService m_symbolSearchService;
 
         public QuestradeSymbolsConfig()
         {
             Filename = $"{nameof(QuestradeSymbolsConfig)}.json";
         }
 
-        public QuestradeSymbolsConfig(SearchService searchService) : this()
+        public QuestradeSymbolsConfig(SymbolSearchService symbolSearchService) : this()
         {
-            m_searchService = searchService;
+            m_symbolSearchService = symbolSearchService;
         }
 
         public DateTime LastUpdated { get; set; } = DateTime.MinValue;
@@ -44,20 +44,20 @@ namespace OptionGaze.Repositories
 
         public async Task Refresh()
         {
-            if (m_searchService == null)
+            if (m_symbolSearchService == null)
             {
                 throw new MissingMemberException("Search Service has not been affected or is null. Please affect a search service to the repository.");
             }
 
-            var symbols = await m_searchService.Search(string.Empty);
+            var symbols = await m_symbolSearchService.Search(string.Empty);
             QuestradeEquitySymbols = new List<EquitySymbol>(symbols.Where(s => s.m_isQuotable && s.m_isTradable));
             LastUpdated = DateTime.Now;
             await Save();
         }
 
-        public void AffectSearchService(SearchService searchService)
+        public void AffectSearchService(SymbolSearchService symbolSearchService)
         {
-            m_searchService = searchService;
+            m_symbolSearchService = symbolSearchService;
         }
 
     }

@@ -1,47 +1,45 @@
-﻿//  ==========================================================================
-//   Code created by Philippe Deslongchamps.
-//   For the Stockgaze project.
-//  ==========================================================================
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using OptionGaze.Login;
-using Questrade.BusinessObjects.Entities;
-using QuestradeAPI;
 
 namespace OptionGaze.Services
 {
 
-    public class SearchService
+    public abstract class SearchService<T>
     {
 
         private static int RequestId;
+        
+        private QuestradeAccountManager m_qam;
 
-        private static List<EquitySymbol> m_results;
+        protected QuestradeAccountManager AccountManager => m_qam;
 
-        private readonly QuestradeAccountManager m_qam;
+        protected List<T> Results => m_results;
 
-        private List<Task> tasks;
-
+        private List<T> m_results;
+        
+        private List<Task> m_tasks;
+        
         private static int GetNextRequestId => ++RequestId;
 
-        public SearchService(QuestradeAccountManager qam)
+        protected SearchService(QuestradeAccountManager qam)
         {
             m_qam = qam;
         }
 
-        public async Task<List<EquitySymbol>> Search(string searchString)
+        public async Task<List<T>> Search(object searchParameters)
         {
-            m_results = new List<EquitySymbol>();
-            if (tasks != null && tasks.Count > 0)
+            m_results = new List<T>();
+            if (m_tasks != null && m_tasks.Count > 0)
             {
-                tasks.ForEach(t => t.Dispose());
+                m_tasks.ForEach(t => t.Dispose());
             }
 
-            tasks = new List<Task>();
+            m_tasks = new List<Task>();
             var requestId = GetNextRequestId;
             ulong offset = 0;
-            while (await SearchPage(searchString, offset, requestId))
+            while (await SearchPage(searchParameters, offset, requestId))
             {
                 offset += Convert.ToUInt64(20);
             }
@@ -50,32 +48,7 @@ namespace OptionGaze.Services
             return m_results;
         }
 
-        private Task<bool> SearchPage(string searchString, ulong offset, int requestId)
-        {
-            var tcs = new TaskCompletionSource<bool>();
-            SearchSymbolsResponse.BeginSearchSymbols(
-                m_qam.GetAuthInfo,
-                async response =>
-                {
-                    SearchSymbolsResponse.EndSearchSymbols(response);
-                    var res = response.AsyncState as SearchSymbolsResponse;
-                    if (res.Symbols.Count == 0)
-                    {
-                        tcs.SetResult(false);
-                    }
-                    else
-                    {
-                        m_results.AddRange(res.Symbols);
-                    
-                        await Task.Delay(TimeSpan.FromMilliseconds(50));
-                        tcs.SetResult(true);
-                    }
-                },
-                requestId,
-                searchString,
-                offset);
-            return tcs.Task;
-        }
+        protected abstract Task<bool> SearchPage(object searchParameters, ulong offset, int requestId);
 
     }
 

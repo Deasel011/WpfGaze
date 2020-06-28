@@ -90,9 +90,12 @@
           <DependentUpon>QuestradeLogin.xaml</DependentUpon>
         </Compile>
         <Compile Include="Models\SymbolModel.cs" />
+        <Compile Include="Services\DataSearchService.cs" />
+        <Compile Include="Services\OptionsService.cs" />
+        <Compile Include="Services\SearchService.cs" />
         <Compile Include="Symbols\QuestradeSymbolsManager.cs" />
         <Compile Include="Repositories\QuestradeSymbolsConfig.cs" />
-        <Compile Include="Services\SearchService.cs" />
+        <Compile Include="Services\SymbolSearchService.cs" />
         <Compile Include="WPFTools\BindableCollection.cs" />
         <Page Include="Login\QuestradeLogin.xaml" />
         <Page Include="MainWindow.xaml">
