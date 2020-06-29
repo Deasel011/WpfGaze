@@ -2,6 +2,7 @@
 //   Code created by Philippe Deslongchamps.
 //   For the Stockgaze project.
 //  ==========================================================================
+
 using System;
 using System.Threading.Tasks;
 using OptionGaze.Login;
@@ -11,9 +12,12 @@ using QuestradeAPI;
 namespace OptionGaze.Services
 {
 
-    public class SymbolSearchService: SearchService<EquitySymbol>
+    public class SymbolSearchService : SearchService<EquitySymbol>
     {
-        public SymbolSearchService(QuestradeAccountManager qam): base(qam) {}
+
+        public SymbolSearchService(QuestradeAccountManager qam) : base(qam)
+        {
+        }
 
         protected override Task<bool> SearchPage(object searchString, ulong offset, int requestId)
         {
@@ -31,7 +35,7 @@ namespace OptionGaze.Services
                     else
                     {
                         Results.AddRange(res.Symbols);
-                    
+
                         await Task.Delay(TimeSpan.FromMilliseconds(50));
                         tcs.SetResult(true);
                     }

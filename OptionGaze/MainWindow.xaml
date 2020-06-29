@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:OptionGaze"
         xmlns:converters="clr-namespace:OptionGaze.Converters"
         xmlns:option="clr-namespace:OptionGaze.Option"
+        xmlns:synchronization="clr-namespace:OptionGaze.Synchronization"
         mc:Ignorable="d"
         Title="MainWindow"
         d:DesignHeight="500" d:DesignWidth="800"
@@ -24,7 +25,7 @@
                         Background="{Binding QuestradeAccountManager.IsConnected, Converter={StaticResource BoolToStatusColorConverter}}"
                         IsReadOnly="True" />
                     <Button
-                        IsEnabled="{Binding QuestradeSymbolsManager.IsRefreshing, Converter={StaticResource NotBooleanConverter}}"
+                        IsEnabled="{Binding QuestradeSymbolIdManager.IsRefreshing, Converter={StaticResource NotBooleanConverter}}"
                         Click="QuestradeSymbolsRefreshButtonClick">
                         Refresh Symbols
                     </Button>
@@ -38,6 +39,9 @@
             </TabItem>
             <TabItem Header="Option" IsEnabled="{Binding QuestradeAccountManager.IsConnected}">
                 <option:OptionsUserControl />
+            </TabItem>
+            <TabItem Header="Synchronization" IsEnabled="{Binding QuestradeAccountManager.IsConnected}">
+                <synchronization:SynchronizationUserControl />
             </TabItem>
         </TabControl>
     </Grid>

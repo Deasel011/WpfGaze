@@ -2,6 +2,7 @@
 //   Code created by Philippe Deslongchamps.
 //   For the Stockgaze project.
 //  ==========================================================================
+
 using System.Security.Cryptography;
 using System.Text;
 using Newtonsoft.Json;

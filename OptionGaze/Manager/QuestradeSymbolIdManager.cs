@@ -2,18 +2,18 @@
 //   Code created by Philippe Deslongchamps.
 //   For the Stockgaze project.
 //  ==========================================================================
+
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using OptionGaze.Repositories;
-using OptionGaze.Services;
 using Prism.Mvvm;
 using Questrade.BusinessObjects.Entities;
 
-namespace OptionGaze.Symbols
+namespace OptionGaze.Manager
 {
 
-    public class QuestradeSymbolsManager : BindableBase, IQuestradeStockIdRepository
+    public class QuestradeSymbolIdManager : BindableBase, IQuestradeStockIdRepository
     {
 
         private readonly QuestradeSymbolsConfig m_questradeSymbolsConfig;
@@ -26,11 +26,13 @@ namespace OptionGaze.Symbols
             set => SetProperty(ref m_isRefreshing, value);
         }
 
-        public QuestradeSymbolsManager(QuestradeSymbolsConfig questradeSymbolsConfig)
+        public QuestradeSymbolIdManager(QuestradeSymbolsConfig questradeSymbolsConfig)
         {
             m_questradeSymbolsConfig = questradeSymbolsConfig;
             if (m_questradeSymbolsConfig.FileExist)
+            {
                 m_questradeSymbolsConfig.Load();
+            }
         }
 
         public DateTime LastUpdated => m_questradeSymbolsConfig.LastUpdated;
@@ -48,11 +50,6 @@ namespace OptionGaze.Symbols
             }
 
             IsRefreshing = false;
-        }
-
-        public void AffectSearchService(SymbolSearchService symbolSearchService)
-        {
-            m_questradeSymbolsConfig.AffectSearchService(symbolSearchService);
         }
 
     }

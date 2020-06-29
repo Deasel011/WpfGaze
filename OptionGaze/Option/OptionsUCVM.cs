@@ -17,22 +17,15 @@ namespace OptionGaze.Option
     public class OptionsUCVM : BindableBase
     {
 
-        private string m_search;
-
         public DataSearchService DataSearchService;
 
-        public string Search
-        {
-            get => m_search;
-            set => SetProperty(ref m_search, value);
-        }
-        
-        public BindableCollection<SymbolModel> Options { get; set; }
+
+        public BindableCollection<SymbolOptionModel> OptionSymbols { get; set; }
 
         public void Initialize()
         {
             DataSearchService = new DataSearchService(GazerVM.GetQuestradeAccountManager());
-            Options = new BindableCollection<SymbolModel>();
+            OptionSymbols = new BindableCollection<SymbolOptionModel>();
         }
 
         public async Task LoadOptions(List<ulong> ids)
@@ -41,12 +34,19 @@ namespace OptionGaze.Option
             DataSearchService.SetIdsList(ids);
 
             var symbolsData = await DataSearchService.Search(null);
-            Options.Clear();
-            Options.AddRange(symbolsData.Where(sd => sd.m_hasOptions).Select(sd => new SymbolModel
+            OptionSymbols.Clear();
+            OptionSymbols.AddRange(symbolsData.Where(sd => sd.m_hasOptions).Select(sd => new SymbolOptionModel
             {
-                QuestradeSymbolId = sd.m_symbolId, Description = sd.m_description, Symbol = sd.m_symbol
+                QuestradeSymbolId = sd.m_symbolId,
+                Description = sd.m_description,
+                Symbol = sd.m_symbol,
+                Exchange = sd.m_listingExchange,
+                ExpiryDate = sd.m_optionExpiryDate,
+                StrikePrice = sd.m_optionStrikePrice,
+                OptionPrice = 0,
+                OptionType = sd.m_optionType,
+                StockPrice = 0
             }));
-
         }
 
     }

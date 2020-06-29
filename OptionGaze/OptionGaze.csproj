@@ -89,13 +89,22 @@
         <Compile Include="Login\QuestradeLogin.xaml.cs">
           <DependentUpon>QuestradeLogin.xaml</DependentUpon>
         </Compile>
-        <Compile Include="Models\SymbolModel.cs" />
+        <Compile Include="Manager\QuestradeSymbolDataManager.cs" />
+        <Compile Include="Models\SymbolOptionModel.cs" />
+        <Compile Include="Repositories\IQuestradeStockDataRepository.cs" />
+        <Compile Include="Repositories\IQuestradeStockIdRepository.cs" />
+        <Compile Include="Repositories\QuestradeSymbolDataConfig.cs" />
         <Compile Include="Services\DataSearchService.cs" />
         <Compile Include="Services\OptionsService.cs" />
         <Compile Include="Services\SearchService.cs" />
-        <Compile Include="Symbols\QuestradeSymbolsManager.cs" />
+        <Compile Include="Services\SearchServiceProvider.cs" />
+        <Compile Include="Manager\QuestradeSymbolIdManager.cs" />
         <Compile Include="Repositories\QuestradeSymbolsConfig.cs" />
         <Compile Include="Services\SymbolSearchService.cs" />
+        <Compile Include="Synchronization\SynchronizationUCVM.cs" />
+        <Compile Include="Synchronization\SynchronizationUserControl.xaml.cs">
+          <DependentUpon>SynchronizationUserControl.xaml</DependentUpon>
+        </Compile>
         <Compile Include="WPFTools\BindableCollection.cs" />
         <Page Include="Login\QuestradeLogin.xaml" />
         <Page Include="MainWindow.xaml">
@@ -112,6 +121,7 @@
             <SubType>Code</SubType>
         </Compile>
         <Page Include="Option\OptionsUserControl.xaml" />
+        <Page Include="Synchronization\SynchronizationUserControl.xaml" />
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Option\OptionsUCVM.cs" />

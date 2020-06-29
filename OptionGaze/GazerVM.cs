@@ -2,23 +2,25 @@
 //   Code created by Philippe Deslongchamps.
 //   For the Stockgaze project.
 //  ==========================================================================
+
 using System;
 using System.Threading.Tasks;
 using OptionGaze.Login;
+using OptionGaze.Manager;
 using OptionGaze.Repositories;
-using OptionGaze.Services;
-using OptionGaze.Symbols;
 using Prism.Mvvm;
 
 namespace OptionGaze
 {
 
-    public class GazerVM : BindableBase //, IDisposable
+    public class GazerVM : BindableBase
     {
 
         private static QuestradeAccountManager s_questradeAccountManager;
 
-        private static QuestradeSymbolsManager s_questradeSymbolsManager;
+        private static QuestradeSymbolIdManager s_questradeSymbolIdManager;
+
+        private static QuestradeSymbolDataManager s_questradeSymbolDataManager;
 
         private bool m_questradeSymbolsAreUpdated;
 
@@ -28,10 +30,16 @@ namespace OptionGaze
             set => SetProperty(ref m_questradeSymbolsAreUpdated, value);
         }
 
-        public QuestradeSymbolsManager QuestradeSymbolsManager
+        public QuestradeSymbolIdManager QuestradeSymbolIdManager
         {
-            get => s_questradeSymbolsManager ?? (s_questradeSymbolsManager = new QuestradeSymbolsManager(new QuestradeSymbolsConfig()));
-            set => SetProperty(ref s_questradeSymbolsManager, value);
+            get => s_questradeSymbolIdManager ?? (s_questradeSymbolIdManager = new QuestradeSymbolIdManager(new QuestradeSymbolsConfig()));
+            set => SetProperty(ref s_questradeSymbolIdManager, value);
+        }
+
+        public QuestradeSymbolDataManager QuestradeSymbolDataManager
+        {
+            get => s_questradeSymbolDataManager ?? (s_questradeSymbolDataManager = new QuestradeSymbolDataManager(new QuestradeSymbolDataConfig()));
+            set => SetProperty(ref s_questradeSymbolDataManager, value);
         }
 
         public QuestradeAccountManager QuestradeAccountManager
@@ -45,12 +53,21 @@ namespace OptionGaze
             return s_questradeAccountManager ?? (s_questradeAccountManager = new QuestradeAccountManager());
         }
 
+        public static QuestradeSymbolDataManager GetQuestradeSymbolDataManager()
+        {
+            return s_questradeSymbolDataManager ?? (s_questradeSymbolDataManager = new QuestradeSymbolDataManager(new QuestradeSymbolDataConfig()));
+        }
+
+        public static QuestradeSymbolIdManager GetQuestradeSymbolIdManager()
+        {
+            return s_questradeSymbolIdManager ?? (s_questradeSymbolIdManager = new QuestradeSymbolIdManager(new QuestradeSymbolsConfig()));
+        }
+
         public async Task Initialize()
         {
             if (GetQuestradeAccountManager().TryRefreshAuth())
             {
-                QuestradeSymbolsManager.AffectSearchService(new SymbolSearchService(QuestradeAccountManager));
-                QuestradeSymbolsAreUpdated = QuestradeSymbolsManager.LastUpdated.AddDays(14) > DateTime.Now;
+                QuestradeSymbolsAreUpdated = QuestradeSymbolIdManager.LastUpdated.AddDays(28) > DateTime.Now;
             }
         }
 

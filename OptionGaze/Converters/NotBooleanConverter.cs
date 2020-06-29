@@ -2,6 +2,7 @@
 //   Code created by Philippe Deslongchamps.
 //   For the Stockgaze project.
 //  ==========================================================================
+
 using System;
 using System.Globalization;
 using System.Windows.Data;

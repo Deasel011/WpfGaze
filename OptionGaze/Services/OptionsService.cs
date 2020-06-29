@@ -8,8 +8,6 @@ namespace OptionGaze.Services
     {
 
         private List<Level1OptionData> m_optionResults;
-        
-        
 
     }
 

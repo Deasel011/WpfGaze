@@ -18,9 +18,7 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right">Search Term :</Label>
-        <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Search}" />
-        <DataGrid Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="0" />
-        <Button Click="SearchButtonOnClick" />
+        <Button Grid.Row="0" Grid.Column="0" Click="LoadButtonOnClick">Load</Button>
+        <DataGrid Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="0" ItemsSource="{Binding OptionSymbols}" />
     </Grid>
 </UserControl>

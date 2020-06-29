@@ -2,6 +2,7 @@
 //   Code created by Philippe Deslongchamps.
 //   For the Stockgaze project.
 //  ==========================================================================
+
 using System.Windows;
 using OptionGaze.Login;
 
@@ -38,11 +39,6 @@ namespace OptionGaze
 
         private async void QuestradeSymbolsRefreshButtonClick(object sender, RoutedEventArgs e)
         {
-            var res = MessageBox.Show("Are you sure you want to refresh the symbols, this operation can take a few minutes.");
-            if (res == MessageBoxResult.OK)
-            {
-                await m_gazerVm.QuestradeSymbolsManager.Refresh();
-            }
         }
 
     }
