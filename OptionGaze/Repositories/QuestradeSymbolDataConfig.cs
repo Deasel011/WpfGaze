@@ -15,7 +15,7 @@ namespace OptionGaze.Repositories
 
         public QuestradeSymbolDataConfig()
         {
-            Filename = $"{nameof(QuestradeSymbolData)}.json";
+            Filename = $"{nameof(QuestradeSymbolDataConfig)}.json";
         }
 
         public QuestradeSymbolDataConfig(DataSearchService dataSearchService) : this()
@@ -25,7 +25,7 @@ namespace OptionGaze.Repositories
 
         public DateTime LastUpdated { get; set; } = DateTime.MinValue;
 
-        public List<SymbolData> QuestradeSymbolData { get; set; }
+        public List<SymbolData> Data { get; set; }
 
         public async Task Refresh()
         {
@@ -35,7 +35,7 @@ namespace OptionGaze.Repositories
             }
 
             var symbols = await m_dataSearchService.Search(string.Empty);
-            QuestradeSymbolData = new List<SymbolData>(symbols.Where(s => s.m_isQuotable && s.m_isTradable));
+            Data = new List<SymbolData>(symbols.Where(s => s.m_isQuotable && s.m_isTradable));
             LastUpdated = DateTime.Now;
             await Save();
         }

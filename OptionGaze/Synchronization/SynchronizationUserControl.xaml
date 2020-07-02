@@ -19,21 +19,32 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" Orientation="Horizontal" IsEnabled="{Binding IsRefreshing, Converter={StaticResource NotBoolConverter}}">
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" Orientation="Horizontal"
+                    IsEnabled="{Binding IsRefreshing, Converter={StaticResource NotBoolConverter}}">
             <Label Content="Symbols" />
             <Button Click="RefreshSymbolId_OnClick">Refresh</Button>
             <Label Content="Last updated:" />
             <TextBox IsReadOnly="True" Text="{Binding SymbolIdManager.LastUpdated, Mode=OneWay}" />
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Orientation="Horizontal" IsEnabled="{Binding IsRefreshing, Converter={StaticResource NotBoolConverter}}">
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Orientation="Horizontal"
+                    IsEnabled="{Binding IsRefreshing, Converter={StaticResource NotBoolConverter}}">
             <Label Content="Symbol Data" />
             <Button Click="RefreshSymbolData_OnClick">Refresh</Button>
             <Label Content="Last updated:" />
             <TextBox IsReadOnly="True" Text="{Binding SymbolDataManager.LastUpdated, Mode=OneWay}" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" Orientation="Horizontal"
+                    IsEnabled="{Binding IsRefreshing, Converter={StaticResource NotBoolConverter}}">
+            <Label Content="Options" />
+            <Button Click="RefreshOptions_OnClick" IsEnabled="{Binding SymbolDataManager.HasData}">Refresh</Button>
+            <Label Content="Last updated:" />
+            <TextBox IsReadOnly="True" Text="{Binding OptionManager.LastUpdated, Mode=OneWay}" />
         </StackPanel>
 
     </Grid>

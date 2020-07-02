@@ -22,6 +22,8 @@ namespace OptionGaze
 
         private static QuestradeSymbolDataManager s_questradeSymbolDataManager;
 
+        private static QuestradeOptionManager s_questradeOptionManager;
+
         private bool m_questradeSymbolsAreUpdated;
 
         public bool QuestradeSymbolsAreUpdated
@@ -69,6 +71,13 @@ namespace OptionGaze
             {
                 QuestradeSymbolsAreUpdated = QuestradeSymbolIdManager.LastUpdated.AddDays(28) > DateTime.Now;
             }
+        }
+
+        public static QuestradeOptionManager GetQuestradeOptionManager()
+        {
+            return s_questradeOptionManager ?? (s_questradeOptionManager = new QuestradeOptionManager(new QuestradeOptionsConfig()));
+            //TODO implement this
+            throw new NotImplementedException();
         }
 
     }

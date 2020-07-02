@@ -9,6 +9,8 @@ namespace OptionGaze.Synchronization
 
         private bool m_isRefreshing;
 
+        private QuestradeOptionManager m_optionManager;
+
         private QuestradeSymbolDataManager m_symbolDataManager;
 
         private QuestradeSymbolIdManager m_symbolIdManager;
@@ -31,10 +33,17 @@ namespace OptionGaze.Synchronization
             set => SetProperty(ref m_symbolDataManager, value);
         }
 
-        public SynchronizationUCVM(QuestradeSymbolDataManager symbolDataManager, QuestradeSymbolIdManager symbolIdManager)
+        public QuestradeOptionManager OptionManager
+        {
+            get => m_optionManager;
+            set => SetProperty(ref m_optionManager, value);
+        }
+
+        public SynchronizationUCVM(QuestradeSymbolDataManager symbolDataManager, QuestradeSymbolIdManager symbolIdManager, QuestradeOptionManager optionManager)
         {
             m_symbolDataManager = symbolDataManager;
             m_symbolIdManager = symbolIdManager;
+            m_optionManager = optionManager;
         }
 
     }

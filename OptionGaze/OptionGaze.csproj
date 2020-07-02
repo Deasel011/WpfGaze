@@ -89,13 +89,16 @@
         <Compile Include="Login\QuestradeLogin.xaml.cs">
           <DependentUpon>QuestradeLogin.xaml</DependentUpon>
         </Compile>
+        <Compile Include="Manager\QuestradeOptionManager.cs" />
         <Compile Include="Manager\QuestradeSymbolDataManager.cs" />
         <Compile Include="Models\SymbolOptionModel.cs" />
-        <Compile Include="Repositories\IQuestradeStockDataRepository.cs" />
-        <Compile Include="Repositories\IQuestradeStockIdRepository.cs" />
+        <Compile Include="Option\OptionIdFilterBindableWrapper.cs" />
+        <Compile Include="Repositories\IQuestradeRepository.cs" />
+        <Compile Include="Repositories\QuestradeOptionsConfig.cs" />
         <Compile Include="Repositories\QuestradeSymbolDataConfig.cs" />
         <Compile Include="Services\DataSearchService.cs" />
-        <Compile Include="Services\OptionsService.cs" />
+        <Compile Include="Services\OptionDataSearchService.cs" />
+        <Compile Include="Services\OptionsSearchService.cs" />
         <Compile Include="Services\SearchService.cs" />
         <Compile Include="Services\SearchServiceProvider.cs" />
         <Compile Include="Manager\QuestradeSymbolIdManager.cs" />

@@ -36,6 +36,10 @@ namespace OptionGaze.Option
 
         private double m_vwap;
 
+        public ulong m_callId;
+
+        public ulong m_putId;
+
         public static IEqualityComparer<SymbolOptionModel> QuestradeSymbolIdComparer { get; } = new QuestradeSymbolIdEqualityComparer();
 
         public string Symbol
@@ -133,6 +137,34 @@ namespace OptionGaze.Option
                 return obj.m_questradeSymbolId.GetHashCode();
             }
 
+        }
+
+        public SymbolOptionModel Clone()
+        {
+            return new SymbolOptionModel
+            {
+                m_description = m_description,
+
+                m_exchange = m_exchange,
+
+                m_expiryDate = m_expiryDate,
+
+                m_optionPrice = m_optionPrice,
+
+                m_optionType = m_optionType,
+
+                m_questradeSymbolId = m_questradeSymbolId,
+
+                m_stockPrice = m_stockPrice,
+
+                m_strikePrice = m_strikePrice,
+
+                m_symbol = m_symbol,
+
+                m_volatility = m_volatility,
+
+                m_vwap = m_vwap
+            };
         }
 
     }

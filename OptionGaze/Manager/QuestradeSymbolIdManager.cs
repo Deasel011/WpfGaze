@@ -37,7 +37,7 @@ namespace OptionGaze.Manager
 
         public DateTime LastUpdated => m_questradeSymbolsConfig.LastUpdated;
 
-        public List<EquitySymbol> QuestradeEquitySymbols => m_questradeSymbolsConfig.QuestradeEquitySymbols;
+        public List<EquitySymbol> Data => m_questradeSymbolsConfig.Data;
 
         public async Task Refresh()
         {

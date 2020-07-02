@@ -30,7 +30,7 @@ namespace OptionGaze.Repositories
 
         public DateTime LastUpdated { get; set; } = DateTime.MinValue;
 
-        public List<EquitySymbol> QuestradeEquitySymbols { get; set; }
+        public List<EquitySymbol> Data { get; set; }
 
         public async Task Refresh()
         {
@@ -40,7 +40,7 @@ namespace OptionGaze.Repositories
             }
 
             var symbols = await m_symbolSearchService.Search(string.Empty);
-            QuestradeEquitySymbols = new List<EquitySymbol>(symbols.Where(s => s.m_isQuotable && s.m_isTradable));
+            Data = new List<EquitySymbol>(symbols.Where(s => s.m_isQuotable && s.m_isTradable));
             LastUpdated = DateTime.Now;
             await Save();
         }

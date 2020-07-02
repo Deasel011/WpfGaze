@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using OptionGaze.Login;
 
@@ -12,6 +11,8 @@ namespace OptionGaze.Services
         private static int RequestId;
 
         private List<Task> m_tasks;
+
+        protected ulong OffsetIncrement = 20;
 
         protected QuestradeAccountManager AccountManager { get; }
 
@@ -35,7 +36,7 @@ namespace OptionGaze.Services
             m_tasks = new List<Task>();
             var requestId = GetNextRequestId;
             ulong offset = 0;
-            while (await SearchPage(searchParameters, offset, requestId)) offset += Convert.ToUInt64(20);
+            while (await SearchPage(searchParameters, offset, requestId)) offset += OffsetIncrement;
 
 
             return Results;

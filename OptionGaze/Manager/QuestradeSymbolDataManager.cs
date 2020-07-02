@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using OptionGaze.Repositories;
 using Prism.Mvvm;
@@ -21,14 +22,20 @@ namespace OptionGaze.Manager
             set => SetProperty(ref m_isRefreshing, value);
         }
 
+        public bool HasData => Data.Any();
+
         public QuestradeSymbolDataManager(QuestradeSymbolDataConfig questradeSymbolDataConfig)
         {
             m_questradeSymbolDataConfig = questradeSymbolDataConfig;
+            if (m_questradeSymbolDataConfig.FileExist)
+            {
+                m_questradeSymbolDataConfig.Load();
+            }
         }
 
         public DateTime LastUpdated => m_questradeSymbolDataConfig.LastUpdated;
 
-        public List<SymbolData> QuestradeSymbolData => m_questradeSymbolDataConfig.QuestradeSymbolData;
+        public List<SymbolData> Data => m_questradeSymbolDataConfig.Data;
 
         public async Task Refresh()
         {
@@ -38,6 +45,7 @@ namespace OptionGaze.Manager
             if (!m_questradeSymbolDataConfig.LastUpdated.Equals(lastUpdated))
             {
                 RaisePropertyChanged(nameof(LastUpdated));
+                RaisePropertyChanged(nameof(HasData));
             }
 
             IsRefreshing = false;
