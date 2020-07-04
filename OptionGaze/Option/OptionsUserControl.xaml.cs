@@ -26,13 +26,7 @@ namespace OptionGaze.Option
 
         private async void LoadButtonOnClick(object sender, RoutedEventArgs e)
         {
-            var symbolsConfig = new QuestradeSymbolsConfig();
-            if (symbolsConfig.FileExist)
-            {
-                await symbolsConfig.Load();
-            }
-
-            await m_optionsUCVM.LoadOptions(symbolsConfig.Data.Select(es => es.m_symbolId).ToList());
+            await m_optionsUCVM.LoadOptions();
         }
 
     }

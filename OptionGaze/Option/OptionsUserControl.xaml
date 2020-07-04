@@ -11,9 +11,11 @@
              d:DataContext="{d:DesignInstance Type={x:Type local:OptionsUCVM}}">
     <UserControl.Resources>
         <converters:NotBooleanConverter x:Key="NotBooleanConverter" />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
@@ -23,20 +25,35 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <WrapPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal">
+        <WrapPanel IsEnabled="{Binding IsLoading, Converter={StaticResource NotBooleanConverter}}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal">
             <Label>Expiry Date</Label>
-            <DatePicker SelectedDate="{Binding OptionIdFilter.ExpiryDate, TargetNullValue={x:Static System:DateTime.Now}}"
-                        DisplayDate="{x:Static System:DateTime.Now}"></DatePicker>
+            <DatePicker
+                SelectedDate="{Binding OptionIdFilter.ExpiryDate, TargetNullValue={x:Static System:DateTime.Now}}" />
             <Label>Exchanges</Label>
             <CheckBox IsChecked="{Binding SearchNyse}">NYSE</CheckBox>
             <CheckBox IsChecked="{Binding SearchTsx}">TSX</CheckBox>
             <CheckBox IsChecked="{Binding SearchNasdaq}">NASDAQ</CheckBox>
             <Label>Max Strike Price</Label>
-            <TextBox Text="{Binding OptionIdFilter.MaxStrikePrice}"></TextBox>
+            <TextBox MinWidth="50" Text="{Binding OptionIdFilter.MaxStrikePrice}" />
             <Label>Min Strike Price</Label>
-            <TextBox Text="{Binding OptionIdFilter.MinStrikePrice}"></TextBox>
-            <Button Click="LoadButtonOnClick" IsEnabled="{Binding IsLoading, Converter={StaticResource NotBooleanConverter}}">Load</Button>
+            <TextBox MinWidth="50" Text="{Binding OptionIdFilter.MinStrikePrice}" />
+            <Button Click="LoadButtonOnClick">
+                Load
+            </Button>
         </WrapPanel>
-        <DataGrid Grid.Row="2" Grid.ColumnSpan="3" Grid.Column="0" ItemsSource="{Binding OptionSymbols}" />
+        <WrapPanel IsEnabled="{Binding IsLoading, Converter={StaticResource NotBooleanConverter}}" Grid.Row="1"
+                   Grid.Column="0" Grid.ColumnSpan="3">
+            <CheckBox IsChecked="{Binding FilterInfiniteReturn}">Hide Infinite Return</CheckBox>
+        </WrapPanel>
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" ZIndex="1" Background="White"
+              Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <ProgressBar Grid.Row="1" Maximum="100" Minimum="0" Value="{Binding Progress.Progress}" Height="30"></ProgressBar>
+        </Grid>
+        <DataGrid Grid.Row="2" Grid.ColumnSpan="3" Grid.Column="0" ItemsSource="{Binding OptionCollectionView}" />
     </Grid>
 </UserControl>

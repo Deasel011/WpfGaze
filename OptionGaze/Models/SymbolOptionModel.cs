@@ -14,6 +14,8 @@ namespace OptionGaze.Option
     public class SymbolOptionModel : BindableBase
     {
 
+        public ulong m_callId;
+
         private string m_description;
 
         private string m_exchange;
@@ -23,6 +25,8 @@ namespace OptionGaze.Option
         private double m_optionPrice;
 
         private OptionType m_optionType;
+
+        public ulong m_putId;
 
         private ulong m_questradeSymbolId;
 
@@ -36,9 +40,7 @@ namespace OptionGaze.Option
 
         private double m_vwap;
 
-        public ulong m_callId;
-
-        public ulong m_putId;
+        private ulong m_volume;
 
         public static IEqualityComparer<SymbolOptionModel> QuestradeSymbolIdComparer { get; } = new QuestradeSymbolIdEqualityComparer();
 
@@ -117,6 +119,12 @@ namespace OptionGaze.Option
         }
 
         public double Return => OptionPrice / StockPrice;
+
+        public ulong Volume
+        {
+            get => m_volume;
+            set => SetProperty(ref m_volume, value);
+        }
 
 
         private sealed class QuestradeSymbolIdEqualityComparer : IEqualityComparer<SymbolOptionModel>

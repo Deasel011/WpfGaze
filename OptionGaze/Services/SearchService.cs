@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using OptionGaze.Login;
+using OptionGaze.Option;
 
 namespace OptionGaze.Services
 {
@@ -27,6 +29,11 @@ namespace OptionGaze.Services
 
         public async Task<List<T>> Search(object searchParameters)
         {
+            return await Search(searchParameters, new ProgressReporter(0));
+        }
+
+        public async Task<List<T>> Search(object searchParameters, ProgressReporter progressReport)
+        {
             Results = new List<T>();
             if (m_tasks != null && m_tasks.Count > 0)
             {
@@ -36,7 +43,11 @@ namespace OptionGaze.Services
             m_tasks = new List<Task>();
             var requestId = GetNextRequestId;
             ulong offset = 0;
-            while (await SearchPage(searchParameters, offset, requestId)) offset += OffsetIncrement;
+            while (await SearchPage(searchParameters, offset, requestId))
+            {
+                offset += OffsetIncrement;
+                progressReport.SetProgress(Convert.ToInt32(offset));
+            }
 
 
             return Results;

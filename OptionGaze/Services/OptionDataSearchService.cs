@@ -12,7 +12,8 @@ namespace OptionGaze.Services
     public class OptionDataSearchService : SearchService<Level1OptionData>
     {
 
-        private List<OptionIdFilter> Filters;
+        private readonly List<OptionIdFilter> Filters;
+
         private List<ulong> m_ids;
 
         public OptionDataSearchService(QuestradeAccountManager qam) : base(qam)
@@ -31,7 +32,7 @@ namespace OptionGaze.Services
             Filters.Clear();
             Filters.AddRange(filters);
         }
-        
+
         protected override Task<bool> SearchPage(object searchParameters, ulong offset, int requestId)
         {
             var tcs = new TaskCompletionSource<bool>();
@@ -45,7 +46,6 @@ namespace OptionGaze.Services
                 AccountManager.GetAuthInfo,
                 async response =>
                 {
-                    
                     GetOptionQuotesResponse.EndGetOptionQuotes(response);
                     var res = response.AsyncState as GetOptionQuotesResponse;
                     Results.AddRange(res.OptionQuotes);

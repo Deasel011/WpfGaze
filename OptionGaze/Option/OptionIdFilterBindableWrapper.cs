@@ -5,15 +5,10 @@ using Questrade.BusinessObjects.Entities;
 namespace OptionGaze.Option
 {
 
-    public class OptionIdFilterBindableWrapper: BindableBase
+    public class OptionIdFilterBindableWrapper : BindableBase
     {
 
         private readonly OptionIdFilter m_optionIdFilter;
-
-        public OptionIdFilterBindableWrapper()
-        {
-            m_optionIdFilter = new OptionIdFilter();
-        }
 
         public DateTime ExpiryDate
         {
@@ -37,6 +32,12 @@ namespace OptionGaze.Option
         {
             get => m_optionIdFilter.m_optionType;
             set => SetProperty(ref m_optionIdFilter.m_optionType, value);
+        }
+
+        public OptionIdFilterBindableWrapper()
+        {
+            m_optionIdFilter = new OptionIdFilter
+                {m_expiryDate = DateTime.Now.Add(TimeSpan.FromDays(14)), m_maxstrikePrice = 999.99, m_minstrikePrice = 0.01};
         }
 
         public OptionIdFilter GetValue()

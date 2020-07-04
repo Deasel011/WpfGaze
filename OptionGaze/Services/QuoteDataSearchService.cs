@@ -8,14 +8,16 @@ using QuestradeAPI;
 
 namespace OptionGaze.Services
 {
-    public class QuoteDataSearchService: SearchService<Level1DataItem>
+
+    public class QuoteDataSearchService : SearchService<Level1DataItem>
     {
+
         private List<ulong> m_ids;
 
         public QuoteDataSearchService(QuestradeAccountManager qam) : base(qam)
         {
         }
-        
+
         public void SetIdsList(List<ulong> ids)
         {
             m_ids = ids;
@@ -34,7 +36,6 @@ namespace OptionGaze.Services
                 AccountManager.GetAuthInfo,
                 async response =>
                 {
-                    
                     GetQuoteResponse.EndGetQuote(response);
                     var res = response.AsyncState as GetQuoteResponse;
                     Results.AddRange(res.Quotes);
@@ -47,5 +48,7 @@ namespace OptionGaze.Services
             );
             return tcs.Task;
         }
+
     }
+
 }
