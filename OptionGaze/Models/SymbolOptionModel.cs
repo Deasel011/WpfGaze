@@ -116,7 +116,7 @@ namespace OptionGaze.Option
             set => SetProperty(ref m_vwap, value);
         }
 
-        public double Return => StockPrice / OptionPrice;
+        public double Return => OptionPrice / StockPrice;
 
 
         private sealed class QuestradeSymbolIdEqualityComparer : IEqualityComparer<SymbolOptionModel>

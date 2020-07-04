@@ -4,9 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:OptionGaze.Option"
+             xmlns:converters="clr-namespace:OptionGaze.Converters"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type={x:Type local:OptionsUCVM}}">
+    <UserControl.Resources>
+        <converters:NotBooleanConverter x:Key="NotBooleanConverter" />
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -18,7 +23,20 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <Button Grid.Row="0" Grid.Column="0" Click="LoadButtonOnClick">Load</Button>
-        <DataGrid Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="0" ItemsSource="{Binding OptionSymbols}" />
+        <WrapPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal">
+            <Label>Expiry Date</Label>
+            <DatePicker SelectedDate="{Binding OptionIdFilter.ExpiryDate, TargetNullValue={x:Static System:DateTime.Now}}"
+                        DisplayDate="{x:Static System:DateTime.Now}"></DatePicker>
+            <Label>Exchanges</Label>
+            <CheckBox IsChecked="{Binding SearchNyse}">NYSE</CheckBox>
+            <CheckBox IsChecked="{Binding SearchTsx}">TSX</CheckBox>
+            <CheckBox IsChecked="{Binding SearchNasdaq}">NASDAQ</CheckBox>
+            <Label>Max Strike Price</Label>
+            <TextBox Text="{Binding OptionIdFilter.MaxStrikePrice}"></TextBox>
+            <Label>Min Strike Price</Label>
+            <TextBox Text="{Binding OptionIdFilter.MinStrikePrice}"></TextBox>
+            <Button Click="LoadButtonOnClick" IsEnabled="{Binding IsLoading, Converter={StaticResource NotBooleanConverter}}">Load</Button>
+        </WrapPanel>
+        <DataGrid Grid.Row="2" Grid.ColumnSpan="3" Grid.Column="0" ItemsSource="{Binding OptionSymbols}" />
     </Grid>
 </UserControl>

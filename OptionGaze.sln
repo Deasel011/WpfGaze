@@ -4,6 +4,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OptionGaze", "OptionGaze\Op
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GazerTests", "GazerTests\GazerTests.csproj", "{E856936E-AA5B-4055-BC4E-08F0ED93AD70}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{CBB47E31-3C54-486D-8194-1CA8E5ADE6D5}"
+ProjectSection(SolutionItems) = preProject
+	Dependencies\QuestradeAPI.Net.dll = Dependencies\QuestradeAPI.Net.dll
+	Dependencies\QuestradeAPI.Net.tlb = Dependencies\QuestradeAPI.Net.tlb
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
