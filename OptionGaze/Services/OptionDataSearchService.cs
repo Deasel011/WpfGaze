@@ -50,7 +50,7 @@ namespace OptionGaze.Services
                     var res = response.AsyncState as GetOptionQuotesResponse;
                     Results.AddRange(res.OptionQuotes);
 
-                    await Task.Delay(TimeSpan.FromMilliseconds(100));
+                    await Task.Delay(TimeSpan.FromMilliseconds(50));
                     tcs.SetResult(true);
                 },
                 requestId,
