@@ -40,9 +40,12 @@ namespace OptionGaze
         {
             try
             {
-                var serializedConfig = File.ReadAllText(System.IO.Path.Combine(Path, Filename));
+                if (Directory.Exists(Path) && File.Exists(System.IO.Path.Combine(Path, Filename)))
+                {
+                    var serializedConfig = File.ReadAllText(System.IO.Path.Combine(Path, Filename));
 
-                JsonConvert.PopulateObject(serializedConfig, this);
+                    JsonConvert.PopulateObject(serializedConfig, this);
+                }
             }
             catch (Exception e)
             {
