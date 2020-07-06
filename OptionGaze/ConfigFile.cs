@@ -18,7 +18,7 @@ namespace OptionGaze
 
         public bool FileExist => Directory.Exists(Path) && File.Exists(System.IO.Path.Combine(Path, Filename));
 
-        private string Path => System.IO.Path.Combine(Environment.CurrentDirectory, "ConfigFiles");
+        private string Path => System.IO.Path.Combine(Environment.SpecialFolder.ApplicationData.ToString(), "StockGaze/ConfigFiles");
 
         public Task Save()
         {
