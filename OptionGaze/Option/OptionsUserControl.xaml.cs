@@ -3,6 +3,8 @@
 //   For the Stockgaze project.
 //  ==========================================================================
 
+using System;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,7 +23,15 @@ namespace OptionGaze.Option
             InitializeComponent();
             m_optionsUCVM = new OptionsUCVM();
             DataContext = m_optionsUCVM;
-            m_optionsUCVM.Initialize();
+            try
+            {
+                m_optionsUCVM.Initialize();
+            }
+            catch (FileLoadException e)
+            {
+               MessageBox.Show("Please do the synchronizations before using the app. After synchronizing, it is advised to restart the app!");
+            }
+            
         }
 
         private async void LoadButtonOnClick(object sender, RoutedEventArgs e)
