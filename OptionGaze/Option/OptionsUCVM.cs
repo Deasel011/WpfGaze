@@ -22,6 +22,18 @@ namespace OptionGaze.Option
     public class OptionsUCVM : BindableBase, IDisposable
     {
 
+        private bool _hideStockPricesGreaterThanStrikePrices;
+
+        public bool HideStockPricesGreaterThanStrikePrices
+        {
+            get => _hideStockPricesGreaterThanStrikePrices;
+            set
+            {
+                SetProperty(ref _hideStockPricesGreaterThanStrikePrices, value);
+                SetOptionCollectionView();
+            }
+        }
+
         private bool _filterInfiniteReturn;
 
         private bool _searchNasdaq;
@@ -132,6 +144,11 @@ namespace OptionGaze.Option
                 if (FilterInfiniteReturn)
                 {
                     show = show && !double.IsInfinity(option.Return);
+                }
+
+                if (HideStockPricesGreaterThanStrikePrices)
+                {
+                    show = show && option.StockPrice < option.StrikePrice;
                 }
 
                 return show;

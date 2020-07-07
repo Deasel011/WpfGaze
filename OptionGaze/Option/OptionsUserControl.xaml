@@ -44,6 +44,7 @@
         <WrapPanel IsEnabled="{Binding IsLoading, Converter={StaticResource NotBooleanConverter}}" Grid.Row="1"
                    Grid.Column="0" Grid.ColumnSpan="3">
             <CheckBox IsChecked="{Binding FilterInfiniteReturn}">Hide Infinite Return</CheckBox>
+            <CheckBox IsChecked="{Binding HideStockPricesGreaterThanStrikePrices}">Hide Stock P > Strike P</CheckBox>
             <Label>Minimum Volume :</Label>
             <TextBox MinWidth="50" Text="{Binding FilterMinVolume}"/>
         </WrapPanel>
