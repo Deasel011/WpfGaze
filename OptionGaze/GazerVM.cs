@@ -76,8 +76,6 @@ namespace OptionGaze
         public static QuestradeOptionManager GetQuestradeOptionManager()
         {
             return s_questradeOptionManager ?? (s_questradeOptionManager = new QuestradeOptionManager(new QuestradeOptionsConfig()));
-            //TODO implement this
-            throw new NotImplementedException();
         }
 
     }

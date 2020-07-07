@@ -23,15 +23,7 @@ namespace OptionGaze.Option
             InitializeComponent();
             m_optionsUCVM = new OptionsUCVM();
             DataContext = m_optionsUCVM;
-            try
-            {
-                m_optionsUCVM.Initialize();
-            }
-            catch (FileLoadException e)
-            {
-               MessageBox.Show("Please do the synchronizations before using the app. After synchronizing, it is advised to restart the app!");
-            }
-            
+            m_optionsUCVM.Initialize();
         }
 
         private async void LoadButtonOnClick(object sender, RoutedEventArgs e)

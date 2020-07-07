@@ -12,17 +12,10 @@ namespace OptionGaze.Synchronization
 
         public SynchronizationUserControl()
         {
-            try
-            {
-                InitializeComponent();
-                m_synchronizationucvm = new SynchronizationUCVM(GazerVM.GetQuestradeSymbolDataManager(), GazerVM.GetQuestradeSymbolIdManager(),
-                    GazerVM.GetQuestradeOptionManager());
-                DataContext = m_synchronizationucvm;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show($"message:{e.Message} stacktrace:{e.StackTrace}");
-            }
+            InitializeComponent();
+            m_synchronizationucvm = new SynchronizationUCVM(GazerVM.GetQuestradeSymbolDataManager(), GazerVM.GetQuestradeSymbolIdManager(),
+                GazerVM.GetQuestradeOptionManager());
+            DataContext = m_synchronizationucvm;
         }
 
         private async void RefreshSymbolId_OnClick(object sender, RoutedEventArgs e)

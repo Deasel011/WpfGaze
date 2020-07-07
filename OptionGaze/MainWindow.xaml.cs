@@ -3,6 +3,7 @@
 //   For the Stockgaze project.
 //  ==========================================================================
 
+using System;
 using System.Windows;
 using OptionGaze.Login;
 
@@ -19,10 +20,17 @@ namespace OptionGaze
 
         public MainWindow()
         {
-            InitializeComponent();
-            m_gazerVm = new GazerVM();
-            DataContext = m_gazerVm;
-            m_gazerVm.Initialize();
+            try
+            {
+                InitializeComponent();
+                m_gazerVm = new GazerVM();
+                DataContext = m_gazerVm;
+                m_gazerVm.Initialize().Wait();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"message:{e.Message} stacktrace:{e.StackTrace}");
+            }
         }
 
         private void QuestradeLoginButtonClick(object sender, RoutedEventArgs e)
