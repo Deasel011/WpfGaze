@@ -20,10 +20,17 @@ namespace OptionGaze.Option
 
         public OptionsUserControl()
         {
-            InitializeComponent();
-            m_optionsUCVM = new OptionsUCVM();
-            DataContext = m_optionsUCVM;
-            m_optionsUCVM.Initialize();
+            try
+            {
+                InitializeComponent();
+                m_optionsUCVM = new OptionsUCVM();
+                DataContext = m_optionsUCVM;
+                m_optionsUCVM.Initialize();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"message:{e.Message} stacktrace:{e.StackTrace}");
+            }
         }
 
         private async void LoadButtonOnClick(object sender, RoutedEventArgs e)

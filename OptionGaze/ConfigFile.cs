@@ -30,7 +30,7 @@ namespace OptionGaze
             }
             catch (Exception e)
             {
-                throw new Exception($"An exception occured while saving the configuration file [{System.IO.Path.Combine(Path, Filename)}]");
+                throw new Exception($"An exception occured while saving the configuration file [{System.IO.Path.Combine(Path, Filename)}]", e);
             }
 
             return Task.CompletedTask;
