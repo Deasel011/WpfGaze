@@ -25,7 +25,7 @@ namespace OptionGaze
                 InitializeComponent();
                 m_gazerVm = new GazerVM();
                 DataContext = m_gazerVm;
-                m_gazerVm.Initialize().Wait();
+                m_gazerVm.Initialize();
             }
             catch (Exception e)
             {

@@ -44,6 +44,18 @@ namespace OptionGaze.Option
 
         private ProgressReporter m_progress;
 
+        private int m_filterMinVolume;
+
+        public int FilterMinVolume
+        {
+            get => m_filterMinVolume;
+            set
+            {
+                SetProperty(ref m_filterMinVolume, value);
+                SetOptionCollectionView();
+            }
+        }
+
         public bool FilterInfiniteReturn
         {
             get => _filterInfiniteReturn;
@@ -114,12 +126,15 @@ namespace OptionGaze.Option
             OptionCollectionView.Filter = filterObject =>
             {
                 var option = filterObject as SymbolOptionModel;
+                
+                bool show = option.Volume >= Convert.ToUInt64(FilterMinVolume);
+                
                 if (FilterInfiniteReturn)
                 {
-                    return !double.IsInfinity(option.Return);
+                    show = show && !double.IsInfinity(option.Return);
                 }
 
-                return true;
+                return show;
             };
             RaisePropertyChanged(nameof(OptionCollectionView));
         }
@@ -198,7 +213,6 @@ namespace OptionGaze.Option
                     newSymbol.Volume = optionData.m_volume;
                     OptionSymbols.Add(newSymbol);
                 }
-
                 OptionIdFilter.OptionType = oldValue;
             }
 
@@ -269,10 +283,5 @@ namespace OptionGaze.Option
                 //SUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUP
             }
         }
-        
-        
-        
-
     }
-
 }

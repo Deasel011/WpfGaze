@@ -26,16 +26,16 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <WrapPanel IsEnabled="{Binding IsLoading, Converter={StaticResource NotBooleanConverter}}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal">
-            <Label>Expiry Date</Label>
+            <Label>Expiry Date : </Label>
             <DatePicker
                 SelectedDate="{Binding OptionIdFilter.ExpiryDate, TargetNullValue={x:Static System:DateTime.Now}}" />
-            <Label>Exchanges</Label>
+            <Label>Exchanges : </Label>
             <CheckBox IsChecked="{Binding SearchNyse}">NYSE</CheckBox>
             <CheckBox IsChecked="{Binding SearchTsx}">TSX</CheckBox>
             <CheckBox IsChecked="{Binding SearchNasdaq}">NASDAQ</CheckBox>
-            <Label>Max Strike Price</Label>
+            <Label>Max Strike Price : </Label>
             <TextBox MinWidth="50" Text="{Binding OptionIdFilter.MaxStrikePrice}" />
-            <Label>Min Strike Price</Label>
+            <Label>Min Strike Price : </Label>
             <TextBox MinWidth="50" Text="{Binding OptionIdFilter.MinStrikePrice}" />
             <Button Click="LoadButtonOnClick">
                 Load
@@ -44,6 +44,8 @@
         <WrapPanel IsEnabled="{Binding IsLoading, Converter={StaticResource NotBooleanConverter}}" Grid.Row="1"
                    Grid.Column="0" Grid.ColumnSpan="3">
             <CheckBox IsChecked="{Binding FilterInfiniteReturn}">Hide Infinite Return</CheckBox>
+            <Label>Minimum Volume :</Label>
+            <TextBox MinWidth="50" Text="{Binding FilterMinVolume}"/>
         </WrapPanel>
         <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" ZIndex="1" Background="White"
               Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}">
