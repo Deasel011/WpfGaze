@@ -8,9 +8,10 @@
         xmlns:option="clr-namespace:OptionGaze.Option"
         xmlns:synchronization="clr-namespace:OptionGaze.Synchronization"
         mc:Ignorable="d"
-        Title="MainWindow"
+        Title="Stockgaze"
         d:DesignHeight="500" d:DesignWidth="800"
-        d:DataContext="{d:DesignInstance Type={x:Type local:GazerVM}}">
+        d:DataContext="{d:DesignInstance Type={x:Type local:GazerVM}}"
+        Icon="Resources/stockgaze.png">
     <Window.Resources>
         <converters:BoolToStatusColorConverter x:Key="BoolToStatusColorConverter" />
         <converters:NotBooleanConverter x:Key="NotBooleanConverter" />
@@ -23,14 +24,6 @@
                     <Button Click="QuestradeLoginButtonClick"> Questrade </Button>
                     <TextBox
                         Background="{Binding QuestradeAccountManager.IsConnected, Converter={StaticResource BoolToStatusColorConverter}}"
-                        IsReadOnly="True" />
-                    <Button
-                        IsEnabled="{Binding QuestradeSymbolIdManager.IsRefreshing, Converter={StaticResource NotBooleanConverter}}"
-                        Click="QuestradeSymbolsRefreshButtonClick">
-                        Refresh Symbols
-                    </Button>
-                    <TextBox
-                        Background="{Binding QuestradeSymbolsAreUpdated, Converter={StaticResource BoolToStatusColorConverter}}"
                         IsReadOnly="True" />
                 </StackPanel>
             </TabItem>
