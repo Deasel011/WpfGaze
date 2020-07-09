@@ -8,7 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using OptionGaze.Repositories;
+using Stockgaze.Core.Option;
 
 namespace OptionGaze.Option
 {

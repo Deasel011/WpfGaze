@@ -71,6 +71,10 @@
         <Project>{6272c0df-fd0b-41a9-b17d-22f4752a05dd}</Project>
         <Name>OptionGaze</Name>
       </ProjectReference>
+      <ProjectReference Include="..\Stockgaze.Core\Stockgaze.Core.csproj">
+        <Project>{54384193-f7f3-410d-bcf0-4a969503e7f8}</Project>
+        <Name>Stockgaze.Core</Name>
+      </ProjectReference>
     </ItemGroup>
     <ItemGroup>
       <None Include="packages.config" />

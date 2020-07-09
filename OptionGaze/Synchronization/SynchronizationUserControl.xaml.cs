@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using Stockgaze.Core;
+using Stockgaze.Core.Synchronization;
 
 namespace OptionGaze.Synchronization
 {

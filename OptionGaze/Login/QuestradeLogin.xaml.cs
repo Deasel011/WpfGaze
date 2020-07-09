@@ -4,6 +4,7 @@
 //  ==========================================================================
 
 using System.Windows;
+using Stockgaze.Core.Login;
 
 namespace OptionGaze.Login
 {

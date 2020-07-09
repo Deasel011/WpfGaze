@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using OptionGaze;
 using OptionGaze.Option;
 using OptionGaze.Synchronization;
+using Stockgaze.Core;
 
 namespace ScheduledSynchronizer
 {

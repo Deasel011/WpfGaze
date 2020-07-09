@@ -6,6 +6,8 @@
 using System.Threading.Tasks;
 using OptionGaze;
 using OptionGaze.Option;
+using Stockgaze.Core;
+using Stockgaze.Core.Option;
 using Xunit;
 
 namespace GazerTests

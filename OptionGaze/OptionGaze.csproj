@@ -109,36 +109,9 @@
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
         </ApplicationDefinition>
-        <Compile Include="ConfigFile.cs" />
-        <Compile Include="Converters\BoolToStatusColorConverter.cs" />
-        <Compile Include="Converters\NotBooleanConverter.cs" />
-        <Compile Include="GazerVM.cs" />
-        <Compile Include="Login\QuestradeAccountConfigFile.cs" />
-        <Compile Include="Login\QuestradeAccountManager.cs" />
-        <Compile Include="Login\QuestradeLogin.xaml.cs">
-          <DependentUpon>QuestradeLogin.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Manager\QuestradeOptionManager.cs" />
-        <Compile Include="Manager\QuestradeSymbolDataManager.cs" />
-        <Compile Include="Models\SymbolOptionModel.cs" />
-        <Compile Include="Option\OptionIdFilterBindableWrapper.cs" />
-        <Compile Include="Repositories\IQuestradeRepository.cs" />
-        <Compile Include="Repositories\QuestradeOptionsConfig.cs" />
-        <Compile Include="Repositories\QuestradeSymbolDataConfig.cs" />
-        <Compile Include="Services\DataSearchService.cs" />
-        <Compile Include="Services\OptionDataSearchService.cs" />
-        <Compile Include="Services\OptionsSearchService.cs" />
-        <Compile Include="Services\QuoteDataSearchService.cs" />
-        <Compile Include="Services\SearchService.cs" />
-        <Compile Include="Services\SearchServiceProvider.cs" />
-        <Compile Include="Manager\QuestradeSymbolIdManager.cs" />
-        <Compile Include="Repositories\QuestradeSymbolsConfig.cs" />
-        <Compile Include="Services\SymbolSearchService.cs" />
-        <Compile Include="Synchronization\SynchronizationUCVM.cs" />
         <Compile Include="Synchronization\SynchronizationUserControl.xaml.cs">
           <DependentUpon>SynchronizationUserControl.xaml</DependentUpon>
         </Compile>
-        <Compile Include="WPFTools\BindableCollection.cs" />
         <Page Include="Login\QuestradeLogin.xaml" />
         <Page Include="MainWindow.xaml">
             <Generator>MSBuild:Compile</Generator>
@@ -148,7 +121,9 @@
             <DependentUpon>App.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
-        <Compile Include="Login\QuestradeLoginDialogVM.cs" />
+        <Compile Include="Login\QuestradeLogin.xaml.cs">
+          <DependentUpon>QuestradeLogin.xaml</DependentUpon>
+        </Compile>
         <Compile Include="MainWindow.xaml.cs">
             <DependentUpon>MainWindow.xaml</DependentUpon>
             <SubType>Code</SubType>
@@ -157,7 +132,6 @@
         <Page Include="Synchronization\SynchronizationUserControl.xaml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Option\OptionsUCVM.cs" />
         <Compile Include="Option\OptionsUserControl.xaml.cs">
           <DependentUpon>OptionsUserControl.xaml</DependentUpon>
         </Compile>
@@ -186,6 +160,12 @@
       <Content Include="Resources\stockgaze.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Stockgaze.Core\Stockgaze.Core.csproj">
+        <Project>{54384193-f7f3-410d-bcf0-4a969503e7f8}</Project>
+        <Name>Stockgaze.Core</Name>
+      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <Import Project="..\packages\MaterialDesignThemes.3.1.3\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.3.1.3\build\MaterialDesignThemes.targets')" />

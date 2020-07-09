@@ -6,6 +6,7 @@
 using System;
 using System.Windows;
 using OptionGaze.Login;
+using Stockgaze.Core;
 
 namespace OptionGaze
 {

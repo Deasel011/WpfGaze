@@ -4,13 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OptionGaze"
-        xmlns:converters="clr-namespace:OptionGaze.Converters"
         xmlns:option="clr-namespace:OptionGaze.Option"
         xmlns:synchronization="clr-namespace:OptionGaze.Synchronization"
+        xmlns:core="clr-namespace:Stockgaze.Core;assembly=Stockgaze.Core"
+        xmlns:converters="clr-namespace:Stockgaze.Core.Converters;assembly=Stockgaze.Core"
         mc:Ignorable="d"
         Title="Stockgaze"
         d:DesignHeight="500" d:DesignWidth="800"
-        d:DataContext="{d:DesignInstance Type={x:Type local:GazerVM}}"
+        d:DataContext="{d:DesignInstance Type={x:Type core:GazerVM}}"
         Icon="Resources/stockgaze.png">
     <Window.Resources>
         <converters:BoolToStatusColorConverter x:Key="BoolToStatusColorConverter" />
