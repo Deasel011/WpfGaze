@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using OptionGaze;
-using OptionGaze.Option;
-using OptionGaze.Synchronization;
 using Stockgaze.Core;
+using Stockgaze.Core.Enums;
 
 namespace ScheduledSynchronizer
 {
@@ -18,21 +16,23 @@ namespace ScheduledSynchronizer
             GazerVM vm = new GazerVM();
             await vm.Initialize();
 
-            switch (synchronizationName)
+            if (!Enum.TryParse(synchronizationName, out TaskType taskType))
             {
-                case "Symbol":
-                    await GazerVM.GetQuestradeSymbolIdManager().Refresh();
-                    break;
-                case "SymbolData":
-                    await GazerVM.GetQuestradeSymbolDataManager().Refresh();
-                    break;
-                case "OptionData":
-                    await GazerVM.GetQuestradeOptionManager().Refresh();
-                    break;
-                default:
-                    throw new ArgumentException($"Could not understand requested synchronization name.");
+                throw new ArgumentException($"Could not understand requested synchronization name.");
             }
 
+            switch (taskType)
+            {
+                case TaskType.SymbolIds:
+                    await GazerVM.GetQuestradeSymbolIdManager().Refresh();
+                    break;
+                case TaskType.SymbolData:
+                    await GazerVM.GetQuestradeSymbolDataManager().Refresh();
+                    break;
+                case TaskType.OptionData:
+                    await GazerVM.GetQuestradeOptionManager().Refresh();
+                    break;
+            }
         }
 
         private static string FindExecutingProgram(string[] args)

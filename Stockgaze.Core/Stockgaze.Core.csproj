@@ -32,12 +32,13 @@
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
     <ItemGroup>
-        <Reference Include="ASquare.WindowsTaskScheduler, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\packages\ASquare.WindowsTaskScheduler.1.6.0.0\lib\Net45\ASquare.WindowsTaskScheduler.dll</HintPath>
-          <Private>True</Private>
-        </Reference>
         <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0">
           <HintPath>..\packages\CommonServiceLocator.2.0.4\lib\net47\CommonServiceLocator.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="Microsoft.CSharp" />
+        <Reference Include="Microsoft.Win32.TaskScheduler, Version=2.8.20.0, Culture=neutral, PublicKeyToken=c416bc1b32d97233">
+          <HintPath>..\packages\TaskScheduler.2.8.20\lib\net452\Microsoft.Win32.TaskScheduler.dll</HintPath>
           <Private>True</Private>
         </Reference>
         <Reference Include="mscorlib" />
@@ -62,6 +63,8 @@
         <Reference Include="System.Configuration" />
         <Reference Include="System.Core" />
         <Reference Include="System.Data" />
+        <Reference Include="System.Drawing" />
+        <Reference Include="System.IO.Compression" />
         <Reference Include="System.Security" />
         <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
           <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
@@ -77,6 +80,7 @@
         <Compile Include="ConfigFile.cs" />
         <Compile Include="Converters\BoolToStatusColorConverter.cs" />
         <Compile Include="Converters\NotBooleanConverter.cs" />
+        <Compile Include="Enums\TaskType.cs" />
         <Compile Include="GazerVM.cs" />
         <Compile Include="Login\QuestradeAccountConfigFile.cs" />
         <Compile Include="Login\QuestradeAccountManager.cs" />
