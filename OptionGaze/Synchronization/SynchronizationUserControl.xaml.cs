@@ -16,7 +16,7 @@ namespace OptionGaze.Synchronization
         {
             InitializeComponent();
             m_synchronizationucvm = new SynchronizationUCVM(GazerVM.GetQuestradeSymbolDataManager(), GazerVM.GetQuestradeSymbolIdManager(),
-                GazerVM.GetQuestradeOptionManager());
+                GazerVM.GetQuestradeOptionManager(), GazerVM.GetSchedulingManager());
             DataContext = m_synchronizationucvm;
         }
 

@@ -97,6 +97,9 @@
         <Compile Include="Repositories\QuestradeOptionsConfig.cs" />
         <Compile Include="Repositories\QuestradeSymbolDataConfig.cs" />
         <Compile Include="Repositories\QuestradeSymbolsConfig.cs" />
+        <Compile Include="Scheduling\InteractiveSchedule.cs" />
+        <Compile Include="Scheduling\Schedule.cs" />
+        <Compile Include="Scheduling\SchedulingUCVM.cs" />
         <Compile Include="Services\DataSearchService.cs" />
         <Compile Include="Services\OptionDataSearchService.cs" />
         <Compile Include="Services\OptionsSearchService.cs" />
@@ -115,9 +118,6 @@
     </ItemGroup>
     <ItemGroup>
       <None Include="packages.config" />
-    </ItemGroup>
-    <ItemGroup>
-      <Folder Include="Scheduling" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

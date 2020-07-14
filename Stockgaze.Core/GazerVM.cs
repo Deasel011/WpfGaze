@@ -1,9 +1,4 @@
-﻿//  ==========================================================================
-//   Code created by Philippe Deslongchamps.
-//   For the Stockgaze project.
-//  ==========================================================================
-
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using Prism.Mvvm;
 using Stockgaze.Core.Login;
@@ -23,6 +18,8 @@ namespace Stockgaze.Core
         private static QuestradeSymbolDataManager s_questradeSymbolDataManager;
 
         private static QuestradeOptionManager s_questradeOptionManager;
+
+        private static SchedulingManager s_schedulingManager;
 
         private bool m_questradeSymbolsAreUpdated;
 
@@ -76,6 +73,11 @@ namespace Stockgaze.Core
         public static QuestradeOptionManager GetQuestradeOptionManager()
         {
             return s_questradeOptionManager ?? (s_questradeOptionManager = new QuestradeOptionManager(new QuestradeOptionsConfig()));
+        }
+
+        public static SchedulingManager GetSchedulingManager()
+        {
+            return s_schedulingManager ?? (s_schedulingManager = new SchedulingManager());
         }
 
     }

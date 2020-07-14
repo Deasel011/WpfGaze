@@ -112,6 +112,9 @@
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
         </ApplicationDefinition>
+        <Compile Include="Scheduling\ScheduleDialogUserControl.xaml.cs">
+          <DependentUpon>ScheduleDialogUserControl.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Synchronization\SynchronizationUserControl.xaml.cs">
           <DependentUpon>SynchronizationUserControl.xaml</DependentUpon>
         </Compile>
@@ -132,6 +135,7 @@
             <SubType>Code</SubType>
         </Compile>
         <Page Include="Option\OptionsUserControl.xaml" />
+        <Page Include="Scheduling\ScheduleDialogUserControl.xaml" />
         <Page Include="Synchronization\SynchronizationUserControl.xaml" />
     </ItemGroup>
     <ItemGroup>

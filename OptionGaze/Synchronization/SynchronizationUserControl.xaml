@@ -46,6 +46,23 @@
             <Label Content="Last updated:" />
             <TextBox IsReadOnly="True" Text="{Binding OptionManager.LastUpdated, Mode=OneWay}" />
         </StackPanel>
-
+        <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.ColumnSpan="4">Scheduling Assistant</Label>
+            <Button Grid.Row="1" Grid.Column="0">Create</Button>
+            <Button Grid.Row="1" Grid.Column="1">Update</Button>
+            <Button Grid.Row="1" Grid.Column="2">Delete</Button>
+            <DataGrid Grid.Row="2" Grid.ColumnSpan="4" Grid.Column="0" ItemsSource="{Binding Schedules}"></DataGrid>
+        </Grid>
     </Grid>
 </UserControl>
