@@ -104,6 +104,7 @@
         <Compile Include="Services\OptionDataSearchService.cs" />
         <Compile Include="Services\OptionsSearchService.cs" />
         <Compile Include="Services\QuoteDataSearchService.cs" />
+        <Compile Include="Services\SchedulingService.cs" />
         <Compile Include="Services\SearchService.cs" />
         <Compile Include="Services\SearchServiceProvider.cs" />
         <Compile Include="Services\SymbolSearchService.cs" />

@@ -11,7 +11,12 @@ namespace Stockgaze.Core.Scheduling
 
         public TaskType SynchronizationType { get; set; }
 
-        public string TaskName { get; set; }
+        private string _taskName;
+        public string TaskName
+        {
+            get => _taskName;
+            set => _taskName = $"Stockgaze-{value}";
+        }
 
         public string Description { get; set; }
 
