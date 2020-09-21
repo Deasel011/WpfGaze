@@ -14,6 +14,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduledSynchronizer", "Sc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stockgaze.Core", "Stockgaze.Core\Stockgaze.Core.csproj", "{54384193-F7F3-410D-BCF0-4A969503E7F8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockgazePipelines", "StockgazePipelines\StockgazePipelines.csproj", "{C1F698C7-3714-4175-AFCE-C5BD18020447}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockgazePipelinesTest", "StockgazePipelinesTest\StockgazePipelinesTest.csproj", "{D7F421EA-AE4C-419F-96FC-86F315890C3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +40,13 @@ Global
 		{54384193-F7F3-410D-BCF0-4A969503E7F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54384193-F7F3-410D-BCF0-4A969503E7F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54384193-F7F3-410D-BCF0-4A969503E7F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1F698C7-3714-4175-AFCE-C5BD18020447}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1F698C7-3714-4175-AFCE-C5BD18020447}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1F698C7-3714-4175-AFCE-C5BD18020447}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1F698C7-3714-4175-AFCE-C5BD18020447}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7F421EA-AE4C-419F-96FC-86F315890C3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7F421EA-AE4C-419F-96FC-86F315890C3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7F421EA-AE4C-419F-96FC-86F315890C3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7F421EA-AE4C-419F-96FC-86F315890C3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

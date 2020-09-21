@@ -7,6 +7,16 @@
   &lt;Assembly Path="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.Core.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Users\pdeslongchamps\RiderProjects\OptionGaze\packages\MahApps.Metro.2.1.1\lib\net47\MahApps.Metro.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=5eeff3fe_002D2090_002D4984_002Da06f_002D39a2377fbd6e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Test1" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::D7F421EA-AE4C-419F-96FC-86F315890C3B::.NETFramework,Version=v4.8::StockgazePipelinesTest.Tests.Test1&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ef7eeade_002Df647_002D454c_002D8fb1_002D00a4b7ea33b3/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="OnCardholderEventReceived_ShouldNotBeInvoked_GivenSoftwareEventIsNotCardholderEvent" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::D7F421EA-AE4C-419F-96FC-86F315890C3B::.NETFramework,Version=v4.8::StockgazePipelinesTest.Tests.Test1&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Stockgaze/@EntryIndexedValue">True</s:Boolean>
 	
 	
