@@ -92,6 +92,7 @@
         <Compile Include="Models\SymbolOptionModel.cs" />
         <Compile Include="Option\OptionIdFilterBindableWrapper.cs" />
         <Compile Include="Option\OptionsUCVM.cs" />
+        <Compile Include="PipelinesUCVM.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="Repositories\IQuestradeRepository.cs" />
         <Compile Include="Repositories\QuestradeOptionsConfig.cs" />

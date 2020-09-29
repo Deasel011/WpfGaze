@@ -4,6 +4,8 @@
 //  ==========================================================================
 
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Prism.Mvvm;
 using QuestradeAPI;
 
@@ -13,6 +15,13 @@ namespace Stockgaze.Core.Login
     public class QuestradeAccountManager : BindableBase
     {
 
+        public QuestradeAccountManager()
+        {
+            m_semaphoreSlim = new SemaphoreSlim(1);
+        }
+
+        private SemaphoreSlim m_semaphoreSlim;
+        
         private AuthenticationInfoImplementation m_authInfo;
 
         public string AccessToken => AuthInfo.AccessToken;
@@ -32,31 +41,39 @@ namespace Stockgaze.Core.Login
             }
         }
 
-        public bool TryRefreshAuth()
+        public async Task<bool> TryRefreshAuth()
         {
-            var config = new QuestradeAccountConfigFile();
-
-            if (!config.FileExist)
+            try
             {
+                await m_semaphoreSlim.WaitAsync();
+
+                var config = new QuestradeAccountConfigFile();
+
+                if (!config.FileExist)
+                {
+                    return false;
+                }
+
+                await config.Load();
+                if (!string.IsNullOrEmpty(config.AccessToken) && !string.IsNullOrEmpty(config.RefreshToken) && AuthAgent.GetInstance().Authenticate(config.RefreshToken, config.IsDemo) is AuthenticationInfoImplementation success && success.IsAuthenticated)
+                {
+                    await RefreshAndSaveConfigFile(config, success);
+                    AuthInfo = success;
+                    return true;
+                }
+
                 return false;
             }
-
-            config.Load();
-            if (!string.IsNullOrEmpty(config.AccessToken) && !string.IsNullOrEmpty(config.RefreshToken) &&
-                AuthAgent.GetInstance().Authenticate(config.RefreshToken, config.IsDemo) is AuthenticationInfoImplementation success && success.IsAuthenticated)
+            finally
             {
-                RefreshAndSaveConfigFile(config, success);
-                AuthInfo = success;
-                return true;
+                m_semaphoreSlim.Release();
             }
-
-            return false;
         }
 
-        public void Login(string token, bool isDemo = true)
+        public async Task Login(string token, bool isDemo = true)
         {
             var questradeAccountConfigFile = new QuestradeAccountConfigFile();
-            questradeAccountConfigFile.Load();
+            await questradeAccountConfigFile.Load();
             questradeAccountConfigFile.RefreshToken = token;
 
             var success = AuthAgent.GetInstance().Authenticate(token, isDemo);
@@ -65,16 +82,16 @@ namespace Stockgaze.Core.Login
                 throw new Exception($"{success.AuthError.ErrorCode} - {success.AuthError.ErrorMessage}");
             }
 
-            RefreshAndSaveConfigFile(questradeAccountConfigFile, success);
+            await RefreshAndSaveConfigFile(questradeAccountConfigFile, success);
             AuthInfo = success;
         }
 
-        private void RefreshAndSaveConfigFile(QuestradeAccountConfigFile questradeAccountConfigFile, AuthenticationInfoImplementation success)
+        private Task RefreshAndSaveConfigFile(QuestradeAccountConfigFile questradeAccountConfigFile, AuthenticationInfoImplementation success)
         {
             questradeAccountConfigFile.AccessToken = success.AccessToken;
             questradeAccountConfigFile.RefreshToken = success.RefreshToken;
             questradeAccountConfigFile.IsDemo = success.IsDemo;
-            questradeAccountConfigFile.Save();
+            return questradeAccountConfigFile.Save();
         }
 
     }

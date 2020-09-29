@@ -64,7 +64,7 @@ namespace Stockgaze.Core
 
         public async Task Initialize()
         {
-            if (GetQuestradeAccountManager().TryRefreshAuth())
+            if (await GetQuestradeAccountManager().TryRefreshAuth())
             {
                 QuestradeSymbolsAreUpdated = QuestradeSymbolIdManager.LastUpdated.AddDays(28) > DateTime.Now;
             }

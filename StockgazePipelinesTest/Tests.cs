@@ -5,6 +5,7 @@ using Questrade.BusinessObjects.Entities;
 using Stockgaze.Core;
 using Stockgaze.Core.Login;
 using Stockgaze.Core.Services;
+using StockgazePipelines;
 using StockgazePipelines.Input;
 using Xunit;
 
@@ -36,17 +37,15 @@ namespace StockgazePipelinesTest
             var input = dataService.Block;
             var filter = new TransformBlock<EquitySymbol,EquitySymbol>(
                 s => s.m_isTradable ? s : null);
-            var ignore = DataflowBlock.NullTarget<EquitySymbol>();
             var output = new ActionBlock<EquitySymbol>(
                 s => {
                     Console.WriteLine($"{s.m_symbol} {s.m_listingExchange} {s.m_description}");
                 });
             input.LinkTo(filter);
-            filter.LinkTo(output, s => s != null);
-            filter.LinkTo(ignore);
-            
+            filter.LinkToNonNull(output);
+
             // Act
-            if (m_accountManager.TryRefreshAuth())
+            if (await m_accountManager.TryRefreshAuth())
             {
                 await dataService.Search("CGC");
             }

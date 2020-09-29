@@ -34,8 +34,11 @@
             <TabItem Header="Option" IsEnabled="{Binding QuestradeAccountManager.IsConnected}">
                 <option:OptionsUserControl />
             </TabItem>
-            <TabItem Header="Synchronization" IsEnabled="{Binding QuestradeAccountManager.IsConnected}">
+            <TabItem Header="Synchronization" IsEnabled="False">
                 <synchronization:SynchronizationUserControl />
+            </TabItem>
+            <TabItem Header="Pipelines" IsEnabled="{Binding QuestradeAccountManager.IsConnected}">
+                
             </TabItem>
         </TabControl>
     </Grid>
