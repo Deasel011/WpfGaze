@@ -125,10 +125,10 @@ namespace Stockgaze.Core.Option
 
         public void Initialize()
         {
-            DataSearchService = new DataSearchService(GazerVM.GetQuestradeAccountManager());
-            OptionDataSearchService = new OptionDataSearchService(GazerVM.GetQuestradeAccountManager());
+            DataSearchService = new DataSearchService(GazerController.GetQuestradeAccountManager());
+            OptionDataSearchService = new OptionDataSearchService(GazerController.GetQuestradeAccountManager());
             OptionSymbols = new BindableCollection<SymbolOptionModel>();
-            QuoteDataSearchService = new QuoteDataSearchService(GazerVM.GetQuestradeAccountManager());
+            QuoteDataSearchService = new QuoteDataSearchService(GazerController.GetQuestradeAccountManager());
             m_op = new OptionIdFilterBindableWrapper();
             m_op.PropertyChanged += OptionFilterOnPropertyChanged;
         }
@@ -171,7 +171,7 @@ namespace Stockgaze.Core.Option
         {
             IsLoading = true;
             //Get list of symbols with options
-            var symbolDataManager = GazerVM.GetQuestradeSymbolDataManager();
+            var symbolDataManager = GazerController.GetQuestradeSymbolDataManager();
             var symbolDataWithOptions = symbolDataManager.Data.Where(sd => sd.m_hasOptions && FilterExchange(sd.m_listingExchange)).ToList();
 
             PopulateGrid(symbolDataWithOptions);
@@ -244,7 +244,7 @@ namespace Stockgaze.Core.Option
         private void PopulateGrid(List<SymbolData> symbolsData)
         {
             //Get list of options
-            var optionsDataManager = GazerVM.GetQuestradeOptionManager();
+            var optionsDataManager = GazerController.GetQuestradeOptionManager();
             optionsDataManager.Data
                 .Where(o => symbolsData.Any(s => s.m_symbolId == o.SymbolId)).ToList()
                 .ForEach(optionBySymbol =>

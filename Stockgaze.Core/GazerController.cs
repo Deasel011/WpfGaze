@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.Win32;
 using Prism.Mvvm;
 using Stockgaze.Core.Login;
 using Stockgaze.Core.Manager;
@@ -8,8 +9,12 @@ using Stockgaze.Core.Repositories;
 namespace Stockgaze.Core
 {
 
-    public class GazerVM : BindableBase
+    public class GazerController : BindableBase, IDisposable
     {
+        const string userRoot = "HKEY_CURRENT_USER";
+        const string subkey = "StockGaze";
+        const string GazerInUse = "GazerInUse";
+        const string keyPath = userRoot + "\\" + subkey;
 
         private static QuestradeAccountManager s_questradeAccountManager;
 
@@ -64,6 +69,12 @@ namespace Stockgaze.Core
 
         public async Task Initialize()
         {
+            if (bool.TryParse((string)(Registry.GetValue(keyPath, GazerInUse, "False") ?? string.Empty), out bool isGazerInUse) && isGazerInUse)
+            {
+                throw new Exception("Cannot start gazer. Another instance is already running.");
+            }
+            
+            Registry.SetValue(keyPath, GazerInUse, "True");
             if (await GetQuestradeAccountManager().TryRefreshAuth())
             {
                 QuestradeSymbolsAreUpdated = QuestradeSymbolIdManager.LastUpdated.AddDays(28) > DateTime.Now;
@@ -78,6 +89,11 @@ namespace Stockgaze.Core
         public static SchedulingManager GetSchedulingManager()
         {
             return s_schedulingManager ?? (s_schedulingManager = new SchedulingManager());
+        }
+
+        public void Dispose()
+        {
+            Registry.SetValue(keyPath, GazerInUse, "False");
         }
 
     }

@@ -15,7 +15,7 @@ namespace StockgazePipelinesTest
     public class Tests
     {
 
-        private GazerVM m_gazer;
+        private GazerController m_gazer;
 
         private QuestradeAccountManager m_accountManager;
 
@@ -25,7 +25,7 @@ namespace StockgazePipelinesTest
         {
             m_accountManager = new QuestradeAccountManager();
             m_symbolSearchService = new SymbolSearchService(m_accountManager);
-            m_gazer = new GazerVM();
+            m_gazer = new GazerController();
             m_gazer.Initialize();
         }
         

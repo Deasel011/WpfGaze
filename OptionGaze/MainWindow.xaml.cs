@@ -4,6 +4,7 @@
 //  ==========================================================================
 
 using System;
+using System.ComponentModel;
 using System.Windows;
 using OptionGaze.Login;
 using Stockgaze.Core;
@@ -17,16 +18,16 @@ namespace OptionGaze
     public partial class MainWindow
     {
 
-        private readonly GazerVM m_gazerVm;
+        private readonly GazerController m_gazerController;
 
         public MainWindow()
         {
             try
             {
                 InitializeComponent();
-                m_gazerVm = new GazerVM();
-                DataContext = m_gazerVm;
-                m_gazerVm.Initialize();
+                m_gazerController = new GazerController();
+                DataContext = m_gazerController;
+                m_gazerController.Initialize();
             }
             catch (Exception e)
             {
@@ -42,12 +43,24 @@ namespace OptionGaze
                 MessageBox.Show($"You entered the refresh token: {dialog.ResponseText} and Demo: {dialog.IsDemo}");
                 var refreshToken = dialog.ResponseText;
                 var isDemo = dialog.IsDemo;
-                ((GazerVM)DataContext).QuestradeAccountManager.Login(refreshToken, isDemo);
+                ((GazerController)DataContext).QuestradeAccountManager.Login(refreshToken, isDemo);
             }
         }
 
         private async void QuestradeSymbolsRefreshButtonClick(object sender, RoutedEventArgs e)
         {
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            m_gazerController?.Dispose();
+            base.OnClosing(e);
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            m_gazerController?.Dispose();
+            base.OnClosed(e);
         }
 
     }

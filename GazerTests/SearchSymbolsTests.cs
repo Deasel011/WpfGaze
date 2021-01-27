@@ -18,13 +18,13 @@ namespace GazerTests
 
         public SearchSymbolsTests()
         {
-            m_gazer = new GazerVM();
+            m_gazer = new GazerController();
             m_gazer.Initialize();
             m_options = new OptionsUCVM();
             m_options.Initialize();
         }
 
-        private readonly GazerVM m_gazer;
+        private readonly GazerController m_gazer;
 
         private readonly OptionsUCVM m_options;
 

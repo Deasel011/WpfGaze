@@ -8,7 +8,8 @@
   &lt;Assembly Path="C:\Users\pdeslongchamps\RiderProjects\OptionGaze\packages\MahApps.Metro.2.1.1\lib\net47\MahApps.Metro.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
 	
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=815acbab_002D5c33_002D4afb_002Dbddb_002Ddb3b4ae5ac63/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Test1 #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9d09dba4_002Dc6d5_002D44e2_002Db094_002Db81d160843ff/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Test1" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::D7F421EA-AE4C-419F-96FC-86F315890C3B::.NETFramework,Version=v4.8::StockgazePipelinesTest.Tests.Test1&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;

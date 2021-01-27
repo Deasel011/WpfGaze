@@ -81,7 +81,7 @@
         <Compile Include="Converters\BoolToStatusColorConverter.cs" />
         <Compile Include="Converters\NotBooleanConverter.cs" />
         <Compile Include="Enums\TaskType.cs" />
-        <Compile Include="GazerVM.cs" />
+        <Compile Include="GazerController.cs" />
         <Compile Include="Login\QuestradeAccountConfigFile.cs" />
         <Compile Include="Login\QuestradeAccountManager.cs" />
         <Compile Include="Login\QuestradeLoginDialogVM.cs" />
@@ -92,7 +92,7 @@
         <Compile Include="Models\SymbolOptionModel.cs" />
         <Compile Include="Option\OptionIdFilterBindableWrapper.cs" />
         <Compile Include="Option\OptionsUCVM.cs" />
-        <Compile Include="PipelinesUCVM.cs" />
+        <Compile Include="Pipelines\PipelinesUCVM.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="Repositories\IQuestradeRepository.cs" />
         <Compile Include="Repositories\QuestradeOptionsConfig.cs" />

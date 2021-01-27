@@ -11,7 +11,7 @@
         mc:Ignorable="d"
         Title="Stockgaze"
         d:DesignHeight="500" d:DesignWidth="800"
-        d:DataContext="{d:DesignInstance Type={x:Type core:GazerVM}}"
+        d:DataContext="{d:DesignInstance Type={x:Type core:GazerController}}"
         Icon="Resources/stockgaze.png">
     <Window.Resources>
         <converters:BoolToStatusColorConverter x:Key="BoolToStatusColorConverter" />
@@ -34,11 +34,10 @@
             <TabItem Header="Option" IsEnabled="{Binding QuestradeAccountManager.IsConnected}">
                 <option:OptionsUserControl />
             </TabItem>
-            <TabItem Header="Synchronization" IsEnabled="False">
+            <TabItem Header="Synchronization" IsEnabled="{Binding QuestradeAccountManager.IsConnected}">
                 <synchronization:SynchronizationUserControl />
             </TabItem>
-            <TabItem Header="Pipelines" IsEnabled="{Binding QuestradeAccountManager.IsConnected}">
-                
+            <TabItem Header="Pipelines" IsEnabled="False">
             </TabItem>
         </TabControl>
     </Grid>

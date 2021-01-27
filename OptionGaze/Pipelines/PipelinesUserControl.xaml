@@ -4,8 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:OptionGaze.Pipelines"
+             xmlns:pipelines="clr-namespace:Stockgaze.Core.Pipelines;assembly=Stockgaze.Core"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance Type={x:Type pipelines:PipelinesUCVM}}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -23,5 +25,17 @@
             <Label>Edit existing:</Label>
             <ListBox MinWidth="50"></ListBox>
         </StackPanel>
+        <Grid Row="1" ColumnSpan="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Row="0"><Button>Input</Button><Button>Transform</Button><Button>Output</Button></StackPanel>
+            <Canvas Grid.Row="1">
+            </Canvas>
+        </Grid>
+        
+            
+        
     </Grid>
 </UserControl>

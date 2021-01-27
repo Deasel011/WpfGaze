@@ -22,7 +22,7 @@ namespace Stockgaze.Core.Services
             }
 
             if (OptionsSearchService != null) return OptionsSearchService;
-            OptionsSearchService = new OptionsSearchService(GazerVM.GetQuestradeAccountManager());
+            OptionsSearchService = new OptionsSearchService(GazerController.GetQuestradeAccountManager());
             OptionsSearchService.SetIdsList(symbolData.Data.Where(sd => sd.m_hasOptions).Select(sd => sd.m_symbolId).ToList());
 
             return OptionsSearchService;
@@ -30,7 +30,7 @@ namespace Stockgaze.Core.Services
 
         public static SymbolSearchService GetSymbolSearchService()
         {
-            return SymbolSearchService ?? (SymbolSearchService = new SymbolSearchService(GazerVM.GetQuestradeAccountManager()));
+            return SymbolSearchService ?? (SymbolSearchService = new SymbolSearchService(GazerController.GetQuestradeAccountManager()));
         }
 
         public static DataSearchService GetDataSearchService()
@@ -43,7 +43,7 @@ namespace Stockgaze.Core.Services
 
             if (DataSearchService != null) return DataSearchService;
 
-            DataSearchService = new DataSearchService(GazerVM.GetQuestradeAccountManager());
+            DataSearchService = new DataSearchService(GazerController.GetQuestradeAccountManager());
             DataSearchService.SetIdsList(symbolsConfig.Data.Select(es => es.m_symbolId).ToList());
             return DataSearchService;
         }

@@ -12,26 +12,34 @@ namespace ScheduledSynchronizer
 
         public static async Task Main(string[] args)
         {
-            var synchronizationName = FindExecutingProgram(args);
-            GazerVM vm = new GazerVM();
-            await vm.Initialize();
-
-            if (!Enum.TryParse(synchronizationName, out TaskType taskType))
+            GazerController controller = null;
+            try
             {
-                throw new ArgumentException($"Could not understand requested synchronization name.");
+                var synchronizationName = FindExecutingProgram(args);
+                controller = new GazerController();
+                await controller.Initialize();
+
+                if (!Enum.TryParse(synchronizationName, out TaskType taskType))
+                {
+                    throw new ArgumentException($"Could not understand requested synchronization name.");
+                }
+
+                switch (taskType)
+                {
+                    case TaskType.SymbolIds:
+                        await GazerController.GetQuestradeSymbolIdManager().Refresh();
+                        break;
+                    case TaskType.SymbolData:
+                        await GazerController.GetQuestradeSymbolDataManager().Refresh();
+                        break;
+                    case TaskType.OptionData:
+                        await GazerController.GetQuestradeOptionManager().Refresh();
+                        break;
+                }
             }
-
-            switch (taskType)
+            finally
             {
-                case TaskType.SymbolIds:
-                    await GazerVM.GetQuestradeSymbolIdManager().Refresh();
-                    break;
-                case TaskType.SymbolData:
-                    await GazerVM.GetQuestradeSymbolDataManager().Refresh();
-                    break;
-                case TaskType.OptionData:
-                    await GazerVM.GetQuestradeOptionManager().Refresh();
-                    break;
+                controller?.Dispose();  
             }
         }
 

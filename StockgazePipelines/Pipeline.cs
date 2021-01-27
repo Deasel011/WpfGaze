@@ -13,7 +13,6 @@ namespace StockgazePipelines
 
     public interface IPipeline
     {
-
         IDisposable BuildPipeline();
 
     }
