@@ -20,6 +20,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -63,6 +64,36 @@
             <Button Grid.Row="1" Grid.Column="1">Update</Button>
             <Button Grid.Row="1" Grid.Column="2">Delete</Button>
             <DataGrid Grid.Row="2" Grid.ColumnSpan="4" Grid.Column="0" ItemsSource="{Binding Schedules}"></DataGrid>
+        </Grid>
+        <Grid Row="4" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="labels"/>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="content"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">Username:</Label>
+            <TextBox Grid.Row="0" Grid.Column="1" MinWidth="200" Text="{Binding Username}"></TextBox> 
+            <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right">Password:</Label>
+            <TextBox Grid.Row="1" Grid.Column="1" MinWidth="200" Text="{Binding Password}"></TextBox>
+            <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right">Server:</Label>
+            <TextBox Grid.Row="2" Grid.Column="1" MinWidth="200" TextAlignment="Center" Text="{Binding SmtpServer}"></TextBox>
+            <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right">To:</Label>
+            <TextBox Grid.Row="3" Grid.Column="1" MinWidth="200" TextAlignment="Center" Text="{Binding To}"></TextBox>
+            <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right">From:</Label>
+            <TextBox Grid.Row="4" Grid.Column="1" MinWidth="200" TextAlignment="Center" Text="{Binding From}"></TextBox>
+            <Button Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right" Click="SaveEmailConfig_OnClick">Save email settings</Button>
+            <Button Grid.Row="6" Grid.Column="1" HorizontalAlignment="Right" Click="SendTestEmail_OnClick">Send Test email</Button>
         </Grid>
     </Grid>
 </UserControl>

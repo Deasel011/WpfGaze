@@ -16,7 +16,7 @@ namespace OptionGaze.Synchronization
         {
             InitializeComponent();
             m_synchronizationucvm = new SynchronizationUCVM(GazerController.GetQuestradeSymbolDataManager(), GazerController.GetQuestradeSymbolIdManager(),
-                GazerController.GetQuestradeOptionManager(), GazerController.GetSchedulingManager());
+                GazerController.GetQuestradeOptionManager(), GazerController.GetSchedulingManager(), GazerController.GetEmailService());
             DataContext = m_synchronizationucvm;
         }
 
@@ -51,6 +51,16 @@ namespace OptionGaze.Synchronization
                 await m_synchronizationucvm.OptionManager.Refresh();
                 m_synchronizationucvm.IsRefreshing = false;
             }
+        }
+
+        private void SaveEmailConfig_OnClick(object sender, RoutedEventArgs e)
+        {
+            m_synchronizationucvm.SaveCurrentEmailConfig();
+        }
+
+        private void SendTestEmail_OnClick(object sender, RoutedEventArgs e)
+        {
+            m_synchronizationucvm.SendTestEmail();
         }
 
     }

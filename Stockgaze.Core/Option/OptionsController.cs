@@ -20,7 +20,7 @@ using Stockgaze.Core.WPFTools;
 namespace Stockgaze.Core.Option
 {
 
-    public class OptionsUCVM : BindableBase, IDisposable
+    public class OptionsController : BindableBase, IDisposable
     {
 
         private bool _hideStockPricesGreaterThanStrikePrices;
@@ -58,6 +58,8 @@ namespace Stockgaze.Core.Option
         private ProgressReporter m_progress;
 
         private int m_filterMinVolume;
+        
+        private ProgressReporter m_progress2;
 
         public int FilterMinVolume
         {
@@ -116,6 +118,12 @@ namespace Stockgaze.Core.Option
             get => m_progress;
             set => SetProperty(ref m_progress, value);
         }
+        
+        public ProgressReporter Progress2
+        {
+            get => m_progress2;
+            set => SetProperty(ref m_progress2, value);
+        }
 
         public void Dispose()
         {
@@ -135,24 +143,24 @@ namespace Stockgaze.Core.Option
 
         private void SetOptionCollectionView()
         {
-            OptionCollectionView = new ListCollectionView(OptionSymbols);
-            OptionCollectionView.Filter = filterObject =>
-            {
-                var option = filterObject as SymbolOptionModel;
-                
-                bool show = option.Volume >= Convert.ToUInt64(FilterMinVolume);
-                
-                if (FilterInfiniteReturn)
-                {
-                    show = show && !double.IsInfinity(option.Return);
-                }
+            OptionCollectionView = new ListCollectionView(OptionSymbols) {
+                Filter = filterObject => {
+                    var option = filterObject as SymbolOptionModel;
 
-                if (HideStockPricesGreaterThanStrikePrices)
-                {
-                    show = show && option.StockPrice < option.StrikePrice;
-                }
+                    bool show = option.Volume >= Convert.ToUInt64(FilterMinVolume);
 
-                return show;
+                    if (FilterInfiniteReturn)
+                    {
+                        show = show && !double.IsInfinity(option.Return);
+                    }
+
+                    if (HideStockPricesGreaterThanStrikePrices)
+                    {
+                        show = show && option.StockPrice < option.StrikePrice;
+                    }
+
+                    return show;
+                }
             };
             RaisePropertyChanged(nameof(OptionCollectionView));
         }
@@ -173,11 +181,12 @@ namespace Stockgaze.Core.Option
             //Get list of symbols with options
             var symbolDataManager = GazerController.GetQuestradeSymbolDataManager();
             var symbolDataWithOptions = symbolDataManager.Data.Where(sd => sd.m_hasOptions && FilterExchange(sd.m_listingExchange)).ToList();
-
+            OptionSymbols.Clear();
+            Progress2 = new ProgressReporter(symbolDataWithOptions.Count);
             PopulateGrid(symbolDataWithOptions);
             await HydrateGrid();
             QuoteDataSearchService.SetIdsList(symbolDataWithOptions.Select(s => s.m_symbolId).ToList());
-            var quotes = await QuoteDataSearchService.Search(null);
+            var quotes = await QuoteDataSearchService.Search(null, Progress2);
             quotes.ForEach(quote =>
             {
                 OptionSymbols.Where(o => o.QuestradeSymbolId == quote.m_symbolId).ToList().ForEach(o =>
@@ -217,7 +226,7 @@ namespace Stockgaze.Core.Option
                 Progress = new ProgressReporter(ids.Count());
                 OptionDataSearchService.SetIdsList(ids);
                 var result = await OptionDataSearchService.Search(null, Progress);
-
+                
                 foreach (var optionData in result)
                 {
                     var symbolOptionModel = OptionSymbols.First(os => os.m_callId == optionData.m_symbolId);
@@ -268,6 +277,21 @@ namespace Stockgaze.Core.Option
                         });
                     }));
                 });
+        }
+
+        public void ApplyConfig(OptionControllerConfig optionControllerConfig)
+        {
+            FilterInfiniteReturn = optionControllerConfig.FilterInfiniteReturn;
+            FilterMinVolume = optionControllerConfig.FilterMinVolume;
+            SearchNasdaq = optionControllerConfig.SearchNasdaq;
+            SearchNyse = optionControllerConfig.SearchNyse;
+            SearchTsx = optionControllerConfig.SearchTsx;
+            OptionIdFilter = new OptionIdFilterBindableWrapper {
+                ExpiryDate = optionControllerConfig.ExpiryDate,
+                MaxStrikePrice = optionControllerConfig.MaxStrikePrice,
+                MinStrikePrice = optionControllerConfig.MinStrikePrice,
+                OptionType = OptionType.Call
+            };
         }
 
     }

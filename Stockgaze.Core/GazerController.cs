@@ -5,6 +5,7 @@ using Prism.Mvvm;
 using Stockgaze.Core.Login;
 using Stockgaze.Core.Manager;
 using Stockgaze.Core.Repositories;
+using Stockgaze.Core.Services;
 
 namespace Stockgaze.Core
 {
@@ -27,6 +28,8 @@ namespace Stockgaze.Core
         private static SchedulingManager s_schedulingManager;
 
         private bool m_questradeSymbolsAreUpdated;
+
+        private static EmailService s_emailService;
 
         public bool QuestradeSymbolsAreUpdated
         {
@@ -89,6 +92,11 @@ namespace Stockgaze.Core
         public static SchedulingManager GetSchedulingManager()
         {
             return s_schedulingManager ?? (s_schedulingManager = new SchedulingManager());
+        }
+
+        public static EmailService GetEmailService()
+        {
+            return s_emailService ?? (s_emailService = new EmailService());
         }
 
         public void Dispose()

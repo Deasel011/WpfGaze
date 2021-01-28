@@ -31,7 +31,7 @@ namespace Stockgaze.Core.Manager
             m_questradeSymbolsConfig = questradeSymbolsConfig;
             if (m_questradeSymbolsConfig.FileExist)
             {
-                m_questradeSymbolsConfig.Load();
+                m_questradeSymbolsConfig.Load().Wait();
             }
         }
 

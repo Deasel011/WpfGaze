@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="..\packages\Scriban.3.4.1\build\Scriban.props" Condition="Exists('..\packages\Scriban.3.4.1\build\Scriban.props')" />
     <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -36,6 +37,18 @@
           <HintPath>..\packages\CommonServiceLocator.2.0.4\lib\net47\CommonServiceLocator.dll</HintPath>
           <Private>True</Private>
         </Reference>
+        <Reference Include="Essential.Templating.Common, Version=1.0.3.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>..\packages\Essential.Templating.Common.1.0.3\lib\NET40\Essential.Templating.Common.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="Essential.Templating.Razor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>..\packages\Essential.Templating.Razor.1.0.8\lib\NET45\Essential.Templating.Razor.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="Essential.Templating.Razor.Email, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>..\packages\Essential.Templating.Razor.Email.1.0.5\lib\NET45\Essential.Templating.Razor.Email.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
         <Reference Include="Microsoft.CSharp" />
         <Reference Include="Microsoft.Win32.TaskScheduler, Version=2.8.20.0, Culture=neutral, PublicKeyToken=c416bc1b32d97233">
           <HintPath>..\packages\TaskScheduler.2.8.20\lib\net452\Microsoft.Win32.TaskScheduler.dll</HintPath>
@@ -59,15 +72,35 @@
         <Reference Include="QuestradeAPI.Net, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bd128b41e40ab322">
           <HintPath>..\Dependencies\QuestradeAPI.Net.dll</HintPath>
         </Reference>
+        <Reference Include="RazorEngine, Version=3.6.1.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a">
+          <HintPath>..\packages\RazorEngine.3.6.1\lib\net45\RazorEngine.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="Scriban, Version=3.4.1.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>..\packages\Scriban.3.4.1\lib\netstandard2.0\Scriban.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
         <Reference Include="System" />
         <Reference Include="System.Configuration" />
         <Reference Include="System.Core" />
         <Reference Include="System.Data" />
         <Reference Include="System.Drawing" />
         <Reference Include="System.IO.Compression" />
+        <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+          <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
         <Reference Include="System.Security" />
+        <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+          <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.0\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
         <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
           <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+          <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
           <Private>True</Private>
         </Reference>
         <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
@@ -80,6 +113,7 @@
         <Compile Include="ConfigFile.cs" />
         <Compile Include="Converters\BoolToStatusColorConverter.cs" />
         <Compile Include="Converters\NotBooleanConverter.cs" />
+        <Compile Include="Emails\EmailTemplates.cs" />
         <Compile Include="Enums\TaskType.cs" />
         <Compile Include="GazerController.cs" />
         <Compile Include="Login\QuestradeAccountConfigFile.cs" />
@@ -90,8 +124,9 @@
         <Compile Include="Manager\QuestradeSymbolIdManager.cs" />
         <Compile Include="Manager\SchedulingManager.cs" />
         <Compile Include="Models\SymbolOptionModel.cs" />
+        <Compile Include="Option\OptionControllerConfig.cs" />
         <Compile Include="Option\OptionIdFilterBindableWrapper.cs" />
-        <Compile Include="Option\OptionsUCVM.cs" />
+        <Compile Include="Option\OptionsController.cs" />
         <Compile Include="Pipelines\PipelinesUCVM.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="Repositories\IQuestradeRepository.cs" />
@@ -102,6 +137,7 @@
         <Compile Include="Scheduling\Schedule.cs" />
         <Compile Include="Scheduling\SchedulingUCVM.cs" />
         <Compile Include="Services\DataSearchService.cs" />
+        <Compile Include="Services\EmailService.cs" />
         <Compile Include="Services\OptionDataSearchService.cs" />
         <Compile Include="Services\OptionsSearchService.cs" />
         <Compile Include="Services\QuoteDataSearchService.cs" />
@@ -122,6 +158,14 @@
       <None Include="packages.config" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+    <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+      <PropertyGroup>
+        <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105.The missing file is {0}.</ErrorText>
+      </PropertyGroup>
+      <Error Condition="!Exists('..\packages\Scriban.3.4.1\build\Scriban.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Scriban.3.4.1\build\Scriban.props'))" />
+      <Error Condition="!Exists('..\packages\Scriban.3.4.1\build\Scriban.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Scriban.3.4.1\build\Scriban.targets'))" />
+    </Target>
+    <Import Project="..\packages\Scriban.3.4.1\build\Scriban.targets" Condition="Exists('..\packages\Scriban.3.4.1\build\Scriban.targets')" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
          Other similar extension points exist, see Microsoft.Common.targets.
     <Target Name="BeforeBuild">

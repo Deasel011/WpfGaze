@@ -29,7 +29,7 @@ namespace Stockgaze.Core.Manager
             m_questradeSymbolDataConfig = questradeSymbolDataConfig;
             if (m_questradeSymbolDataConfig.FileExist)
             {
-                m_questradeSymbolDataConfig.Load();
+                m_questradeSymbolDataConfig.Load().Wait();
             }
         }
 

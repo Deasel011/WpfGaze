@@ -7,6 +7,7 @@
         SymbolIds,
         SymbolData,
         OptionData,
+        OptionSearch
 
     }
 

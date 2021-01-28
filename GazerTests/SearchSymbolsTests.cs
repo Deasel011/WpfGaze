@@ -20,13 +20,13 @@ namespace GazerTests
         {
             m_gazer = new GazerController();
             m_gazer.Initialize();
-            m_options = new OptionsUCVM();
+            m_options = new OptionsController();
             m_options.Initialize();
         }
 
         private readonly GazerController m_gazer;
 
-        private readonly OptionsUCVM m_options;
+        private readonly OptionsController m_options;
 
         [Fact]
         public void TestAuth()

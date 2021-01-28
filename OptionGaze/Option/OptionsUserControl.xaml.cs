@@ -16,16 +16,16 @@ namespace OptionGaze.Option
     public partial class OptionsUserControl : UserControl
     {
 
-        public OptionsUCVM m_optionsUCVM { get; set; }
+        public OptionsController OptionsController { get; set; }
 
         public OptionsUserControl()
         {
             try
             {
                 InitializeComponent();
-                m_optionsUCVM = new OptionsUCVM();
-                DataContext = m_optionsUCVM;
-                m_optionsUCVM.Initialize();
+                OptionsController = new OptionsController();
+                DataContext = OptionsController;
+                OptionsController.Initialize();
             }
             catch (Exception e)
             {
@@ -35,7 +35,7 @@ namespace OptionGaze.Option
 
         private async void LoadButtonOnClick(object sender, RoutedEventArgs e)
         {
-            await m_optionsUCVM.LoadOptions();
+            await OptionsController.LoadOptions();
         }
 
     }
