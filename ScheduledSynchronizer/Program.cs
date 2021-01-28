@@ -47,7 +47,7 @@ namespace ScheduledSynchronizer
                         optionController.ApplyConfig(settings);
                         optionController.runSync = true;
                         await optionController.LoadOptions();
-                        emailService.SendOptionResults("Options Report",settings.ToString() ,settings.Emails, optionController.OptionSymbolsSynchronous);
+                        emailService.SendOptionResults("Options Report",settings.ToString() ,settings.Emails, optionController.FilterOptionsSynchronous());
                         break;
                 }
             }
@@ -101,6 +101,10 @@ namespace ScheduledSynchronizer
             if (TryGetArgumentValue(args, nameof(OptionControllerConfig.FilterMinVolume), out string filterMinVolume))
             {
                 optionControllerConfig.FilterMinVolume = ParseIntArgument(filterMinVolume, optionControllerConfig.FilterMinVolume, nameof(OptionControllerConfig.FilterMinVolume));
+            }
+            if (TryGetArgumentValue(args, nameof(OptionControllerConfig.FilterStrikeGreaterThanStock), out string gtThanStock))
+            {
+                optionControllerConfig.FilterStrikeGreaterThanStock = ParseBoolArgument(gtThanStock, optionControllerConfig.FilterStrikeGreaterThanStock, nameof(OptionControllerConfig.FilterStrikeGreaterThanStock));
             }
 
             return optionControllerConfig;

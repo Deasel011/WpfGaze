@@ -325,6 +325,7 @@ namespace Stockgaze.Core.Option
 
         public void ApplyConfig(OptionControllerConfig optionControllerConfig)
         {
+            FilterStrikeGreaterThanStock = optionControllerConfig.FilterStrikeGreaterThanStock;
             FilterInfiniteReturn = optionControllerConfig.FilterInfiniteReturn;
             FilterMinVolume = optionControllerConfig.FilterMinVolume;
             SearchNasdaq = optionControllerConfig.SearchNasdaq;
@@ -337,6 +338,14 @@ namespace Stockgaze.Core.Option
                 OptionType = OptionType.Call
             };
         }
+
+        public bool FilterStrikeGreaterThanStock { get; set; } = false;
+
+        public List<SymbolOptionModel> FilterOptionsSynchronous() { return OptionSymbolsSynchronous.Where(option => 
+            (!FilterStrikeGreaterThanStock || option.StrikePrice > option.StockPrice) &&
+            (!FilterInfiniteReturn || !double.IsInfinity(option.Return)) &&
+            (FilterMinVolume == 0 || option.Volume >= Convert.ToUInt64(FilterMinVolume))
+            ).ToList(); }
 
     }
 

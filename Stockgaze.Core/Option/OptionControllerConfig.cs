@@ -31,6 +31,8 @@ namespace Stockgaze.Core.Option
 
         public List<string> Emails { get; set; } = new List<string>();
 
+        public bool FilterStrikeGreaterThanStock { get; set; }
+
         public override string ToString() { return $"--ExpiryDate {ExpiryDate.ToShortDateString()} --MaxStrikePrice {MaxStrikePrice} --MinStrikePrice {MinStrikePrice} --SearchNasdaq {SearchNasdaq} --SearchTsx {SearchTsx} --SearchNyse {SearchNyse} --FilterInfiniteReturn {FilterInfiniteReturn} --FilterMinVolume{FilterMinVolume} --Emails {string.Join(";", Emails)}"; }
 
     }
