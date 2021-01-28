@@ -61,6 +61,8 @@ namespace Stockgaze.Core.Option
         
         private ProgressReporter m_progress2;
 
+        private TaskScheduler _uiScheduler;
+
         public int FilterMinVolume
         {
             get => m_filterMinVolume;
@@ -107,6 +109,8 @@ namespace Stockgaze.Core.Option
 
         public BindableCollection<SymbolOptionModel> OptionSymbols { get; set; }
 
+        public List<SymbolOptionModel> OptionSymbolsSynchronous { get; set; } = new List<SymbolOptionModel>();
+
         public OptionIdFilterBindableWrapper OptionIdFilter
         {
             get => m_op;
@@ -136,6 +140,7 @@ namespace Stockgaze.Core.Option
             DataSearchService = new DataSearchService(GazerController.GetQuestradeAccountManager());
             OptionDataSearchService = new OptionDataSearchService(GazerController.GetQuestradeAccountManager());
             OptionSymbols = new BindableCollection<SymbolOptionModel>();
+            OptionSymbolsSynchronous = new List<SymbolOptionModel>();
             QuoteDataSearchService = new QuoteDataSearchService(GazerController.GetQuestradeAccountManager());
             m_op = new OptionIdFilterBindableWrapper();
             m_op.PropertyChanged += OptionFilterOnPropertyChanged;
@@ -143,7 +148,7 @@ namespace Stockgaze.Core.Option
 
         private void SetOptionCollectionView()
         {
-            OptionCollectionView = new ListCollectionView(OptionSymbols) {
+            OptionCollectionView = new ListCollectionView(runSync?OptionSymbolsSynchronous.ToList():OptionSymbols.ToList()) {
                 Filter = filterObject => {
                     var option = filterObject as SymbolOptionModel;
 
@@ -181,7 +186,7 @@ namespace Stockgaze.Core.Option
             //Get list of symbols with options
             var symbolDataManager = GazerController.GetQuestradeSymbolDataManager();
             var symbolDataWithOptions = symbolDataManager.Data.Where(sd => sd.m_hasOptions && FilterExchange(sd.m_listingExchange)).ToList();
-            OptionSymbols.Clear();
+            if (runSync) OptionSymbolsSynchronous.Clear(); else OptionSymbols.Clear();
             Progress2 = new ProgressReporter(symbolDataWithOptions.Count);
             PopulateGrid(symbolDataWithOptions);
             await HydrateGrid();
@@ -189,7 +194,15 @@ namespace Stockgaze.Core.Option
             var quotes = await QuoteDataSearchService.Search(null, Progress2);
             quotes.ForEach(quote =>
             {
-                OptionSymbols.Where(o => o.QuestradeSymbolId == quote.m_symbolId).ToList().ForEach(o =>
+                if (runSync)
+                {
+                    OptionSymbolsSynchronous.Where(o => o.QuestradeSymbolId == quote.m_symbolId).ToList().ForEach(o =>
+                    {
+                        o.StockPrice = quote.m_lastTradePrice;
+                        o.Symbol = quote.m_symbol;
+                    });
+                }else
+                    OptionSymbols.Where(o => o.QuestradeSymbolId == quote.m_symbolId).ToList().ForEach(o =>
                 {
                     o.StockPrice = quote.m_lastTradePrice;
                     o.Symbol = quote.m_symbol;
@@ -198,6 +211,8 @@ namespace Stockgaze.Core.Option
             SetOptionCollectionView();
             IsLoading = false;
         }
+
+        public bool runSync { get; set; } = false;
 
         private bool FilterExchange(string listingExchange)
         {
@@ -222,14 +237,14 @@ namespace Stockgaze.Core.Option
                 var oldValue = OptionIdFilter.OptionType;
                 OptionIdFilter.OptionType = OptionType.Call;
                 OptionDataSearchService.SetFilter(new List<OptionIdFilter> {OptionIdFilter.GetValue()});
-                var ids = OptionSymbols.Select(os => os.m_callId).ToList();
+                var ids = runSync?OptionSymbolsSynchronous.Select(os => os.m_callId).ToList():OptionSymbols.Select(os => os.m_callId).ToList();
                 Progress = new ProgressReporter(ids.Count());
                 OptionDataSearchService.SetIdsList(ids);
                 var result = await OptionDataSearchService.Search(null, Progress);
                 
                 foreach (var optionData in result)
                 {
-                    var symbolOptionModel = OptionSymbols.First(os => os.m_callId == optionData.m_symbolId);
+                    var symbolOptionModel = runSync?OptionSymbolsSynchronous.First(os => os.m_callId == optionData.m_symbolId):OptionSymbols.First(os => os.m_callId == optionData.m_symbolId);
 
                     var newSymbol = symbolOptionModel.Clone();
                     newSymbol.Symbol = optionData.m_symbol;
@@ -238,7 +253,10 @@ namespace Stockgaze.Core.Option
                     newSymbol.OptionPrice = optionData.m_lastTradePrice;
                     newSymbol.OptionType = OptionType.Call;
                     newSymbol.Volume = optionData.m_volume;
-                    OptionSymbols.Add(newSymbol);
+                    if(runSync)
+                        OptionSymbolsSynchronous.Add(newSymbol);
+                    else
+                        OptionSymbols.Add(newSymbol);
                 }
                 OptionIdFilter.OptionType = oldValue;
             }
@@ -246,7 +264,12 @@ namespace Stockgaze.Core.Option
             // TODO get puts
 
             // TODO remove undefined
-            OptionSymbols.Where(os => os.OptionType == OptionType.Undefined).ToList()
+            if (runSync)
+                OptionSymbolsSynchronous.Where(os => os.OptionType == OptionType.Undefined)
+                             .ToList()
+                             .ForEach(os => OptionSymbolsSynchronous.Remove(os));
+            else
+                OptionSymbols.Where(os => os.OptionType == OptionType.Undefined).ToList()
                 .ForEach(os => OptionSymbols.Remove(os));
         }
 
@@ -258,7 +281,28 @@ namespace Stockgaze.Core.Option
                 .Where(o => symbolsData.Any(s => s.m_symbolId == o.SymbolId)).ToList()
                 .ForEach(optionBySymbol =>
                 {
-                    OptionSymbols.AddRange(optionBySymbol.Item2.Where(cped => cped.m_expiryDate <= OptionIdFilter.ExpiryDate).SelectMany(chain =>
+                    if (runSync)
+                    {
+                        OptionSymbolsSynchronous.AddRange(optionBySymbol.Item2.Where(cped => cped.m_expiryDate <= OptionIdFilter.ExpiryDate).SelectMany(chain =>
+                        {
+                            return chain.m_chainPerRoot.SelectMany(chainPerRoot =>
+                            {
+                                return chainPerRoot.m_chainPerStrikePrice.Where((cpsp, index) =>
+                                    cpsp.m_strikePrice >= OptionIdFilter.MinStrikePrice && cpsp.m_strikePrice <= OptionIdFilter.MaxStrikePrice).Select(
+                                    chainPerStrikePrice => new SymbolOptionModel
+                                    {
+                                        QuestradeSymbolId = optionBySymbol.SymbolId,
+                                        ExpiryDate = chain.m_expiryDate,
+                                        Description = chain.m_description,
+                                        Exchange = chain.m_listingExchange,
+                                        StrikePrice = chainPerStrikePrice.m_strikePrice,
+                                        m_callId = chainPerStrikePrice.m_callSymbolId,
+                                        m_putId = chainPerStrikePrice.m_putSymbolId
+                                    });
+                            });
+                        }));
+                    }else
+                        OptionSymbols.AddRange(optionBySymbol.Item2.Where(cped => cped.m_expiryDate <= OptionIdFilter.ExpiryDate).SelectMany(chain =>
                     {
                         return chain.m_chainPerRoot.SelectMany(chainPerRoot =>
                         {

@@ -29,7 +29,7 @@ namespace Stockgaze.Core.Services
             }
         }
 
-        public void SendOptionResults(string subject, string filter, List<string> emailAdresses, BindableCollection<SymbolOptionModel> optionControllerOptionSymbols)
+        public void SendOptionResults(string subject, string filter, List<string> emailAdresses, List<SymbolOptionModel> optionControllerOptionSymbols)
         {
             // create the message
             var msg = new MailMessage();
@@ -37,15 +37,17 @@ namespace Stockgaze.Core.Services
             emailAdresses.ForEach(email => msg.To.Add(email));
             msg.Subject = subject;
             msg.IsBodyHtml = true;
-            msg.Body = EmailTemplates.FillOptionTemplate(filter, optionControllerOptionSymbols.ToList());
+            msg.Body = EmailTemplates.FillOptionTemplate(filter, optionControllerOptionSymbols);
 
             // configure the smtp server
-            var smtp = new SmtpClient(EmailConfigFile.SmtpServer) {
-                Credentials = new System.Net.NetworkCredential(EmailConfigFile.From, EmailConfigFile.Password),
-                Port = 587,
-                EnableSsl = true,
-                UseDefaultCredentials = false
-            };
+            var smtp = new SmtpClient();
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = new System.Net.NetworkCredential(EmailConfigFile.From, EmailConfigFile.Password);
+            smtp.Host = EmailConfigFile.SmtpServer;
+            smtp.Port = 587;
+            smtp.EnableSsl = true;
+                
+            
             // send the message
             try
             {

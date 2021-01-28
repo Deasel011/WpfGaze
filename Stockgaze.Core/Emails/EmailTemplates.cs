@@ -54,45 +54,46 @@ namespace Stockgaze.Core.Emails
                     OptionType
                 </th>
         </tr>
+        
+            {{ for option in options }}
         <tr>
-            {{for option in options}}
                 <td>
-                    {{option.Symbol}}
+                    {{option.symbol}}
                 </td>
                 <td>
-                    {{option.Exchange}}
+                    {{option.exchange}}
                 </td>
                 <td>
-                    {{option.ExpiryDate}}
+                    {{option.expiry_date}}
                 </td>
                 <td>
-                    {{option.Return}}
+                    {{option.return}}
                 </td>
                 <td>
-                    {{option.Volume}}
+                    {{option.volume}}
                 </td>
                 <td>
-                    {{option.StockPrice}}
+                    {{option.stock_price}}
                 </td>
                 <td>
-                    {{option.StrikePrice}}
+                    {{option.strike_price}}
                 </td>
                 <td>
-                    {{option.OptionPrice}}
+                    {{option.option_price}}
                 </td>
                 <td>
-                    {{option.Volatility}}
+                    {{option.volatility}}
                 </td>
                 <td>
-                    {{option.Description}}
+                    {{option.description}}
                 </td>
                 <td>
-                    {{option.OptionType}}
+                    {{option.option_type}}
                 </td>
-            {{end}}
         </tr>
-
+            {{end}}
         </table>
+        <p>{{count}} items in table</p>
         <p>{{filter}}</p>";
         
         #endregion
@@ -100,9 +101,11 @@ namespace Stockgaze.Core.Emails
 
         public static string FillOptionTemplate(string filter, List<SymbolOptionModel> optionList)
         {
+            IEnumerable<SymbolOptionModel> options = optionList.OrderByDescending(o => o.Return);
             var template = Template.Parse(OptionTemplate);
             return template.Render(new {
-                Options = optionList.OrderByDescending(o => o.Return),
+                Options = options,
+                Count = options.Count(),
                 Filter = filter
             });
         }

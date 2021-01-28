@@ -45,8 +45,9 @@ namespace ScheduledSynchronizer
                         optionController.Initialize();
                         var settings = ExtractOptionControllerSettings(args);
                         optionController.ApplyConfig(settings);
+                        optionController.runSync = true;
                         await optionController.LoadOptions();
-                        emailService.SendOptionResults("Options Report",settings.ToString() ,settings.Emails, optionController.OptionSymbols);
+                        emailService.SendOptionResults("Options Report",settings.ToString() ,settings.Emails, optionController.OptionSymbolsSynchronous);
                         break;
                 }
             }

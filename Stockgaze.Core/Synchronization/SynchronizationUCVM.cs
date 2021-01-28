@@ -163,7 +163,7 @@ namespace Stockgaze.Core.Synchronization
             Schedules.Add(schedule);
         }
 
-        public void SendTestEmail() { m_emailService.SendOptionResults("Options Report",String.Empty, To == null ? new List<string>() :new List<string>(To.Split(';').ToList()), new BindableCollection<SymbolOptionModel>()); }
+        public void SendTestEmail() { m_emailService.SendOptionResults("Options Report",String.Empty, To == null ? new List<string>() :new List<string>(To.Split(';').ToList()), new List<SymbolOptionModel>()); }
 
     }
 

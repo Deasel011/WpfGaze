@@ -9,9 +9,10 @@
 &lt;/AssemblyExplorer&gt;</s:String>
 	
 	
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9d09dba4_002Dc6d5_002D44e2_002Db094_002Db81d160843ff/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Test1" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9d09dba4_002Dc6d5_002D44e2_002Db094_002Db81d160843ff/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Test1" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::D7F421EA-AE4C-419F-96FC-86F315890C3B::.NETFramework,Version=v4.8::StockgazePipelinesTest.Tests.Test1&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::E856936E-AA5B-4055-BC4E-08F0ED93AD70::.NETFramework,Version=v4.8::GazerTests.EmailServiceTest.TestSendDummyEmail&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b16ef021_002Dc8b3_002D4962_002Db9f8_002D8cfecf4b2fb9/@EntryIndexedValue"></s:String>
@@ -22,6 +23,11 @@
 	<s:Boolean x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ebf6bd82_002D018f_002D4a19_002Da341_002D9dcec076abbe/@EntryIndexRemoved">True</s:Boolean>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ef7eeade_002Df647_002D454c_002D8fb1_002D00a4b7ea33b3/@EntryIndexedValue"></s:String>
 	<s:Boolean x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ef7eeade_002Df647_002D454c_002D8fb1_002D00a4b7ea33b3/@EntryIndexRemoved">True</s:Boolean>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=fa408d60_002D15e3_002D4202_002D8158_002Dfa09578e58fb/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="TestSendDummyEmail" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::E856936E-AA5B-4055-BC4E-08F0ED93AD70::.NETFramework,Version=v4.8::GazerTests.EmailServiceTest.TestSendDummyEmail&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Stockgaze/@EntryIndexedValue">True</s:Boolean>
 	
 	
