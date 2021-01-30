@@ -9,12 +9,7 @@
 &lt;/AssemblyExplorer&gt;</s:String>
 	
 	
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9d09dba4_002Dc6d5_002D44e2_002Db094_002Db81d160843ff/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Test1" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::D7F421EA-AE4C-419F-96FC-86F315890C3B::.NETFramework,Version=v4.8::StockgazePipelinesTest.Tests.Test1&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::E856936E-AA5B-4055-BC4E-08F0ED93AD70::.NETFramework,Version=v4.8::GazerTests.EmailServiceTest.TestSendDummyEmail&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
-&lt;/SessionState&gt;</s:String>
+	
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b16ef021_002Dc8b3_002D4962_002Db9f8_002D8cfecf4b2fb9/@EntryIndexedValue"></s:String>
 	<s:Boolean x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b16ef021_002Dc8b3_002D4962_002Db9f8_002D8cfecf4b2fb9/@EntryIndexRemoved">True</s:Boolean>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e7f69144_002Dd296_002D4b83_002D9e5e_002D1251707bd38c/@EntryIndexedValue"></s:String>

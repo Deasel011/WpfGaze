@@ -19,69 +19,64 @@ namespace Stockgaze.Core.Emails
         #region templates
         private const string OptionTemplate =
             @"
-<style>
-    table {border: 1px solid purple; border-collapse: collapse;}
-    td   {border: 1px solid purple}
-    th    {border: 1px solid purple}
-</style>
-<table>
+<table style='border: 1px solid purple; border-collapse: collapse;'>
         <tr>
-                <th>
+                <th style='border: 1px solid purple'>
                     Symbol
                 </th>
-                <th>
+                <th style='border: 1px solid purple'>
                     ExpiryDate
                 </th>
-                <th>
+                <th style='border: 1px solid purple'>
                     Return
                 </th>
-                <th>
+                <th style='border: 1px solid purple'>
                     Volume
                 </th>
-                <th>
+                <th style='border: 1px solid purple'>
                     StockPrice
                 </th>
-                <th>
+                <th style='border: 1px solid purple'>
                     StrikePrice
                 </th>
-                <th>
+                <th style='border: 1px solid purple'>
                     OptionPrice
                 </th>
-                <th>
+                <th style='border: 1px solid purple'>
                     Volatility
                 </th>
-                <th>
+                <th style='border: 1px solid purple'>
                     Description
                 </th>
         </tr>
         
             {{ for option in options }}
         <tr>
-                <td>
+                <td style='border: 1px solid purple'>
                     {{option.symbol}}
                 </td>
-                <td>
+                <td style='border: 1px solid purple'>
                     {{option.expiry_date}}
                 </td>
-                <td>
+                <td style='border: 1px solid purple'>
                     {{option.return}}
                 </td>
-                <td>
+                <td style='border: 1px solid purple'>
                     {{option.volume}}
                 </td>
-                <td>
+                <td style='border: 1px solid purple'>
                     {{option.stock_price}}
                 </td>
-                <td>
+                <td style='border: 1px solid purple'>
                     {{option.strike_price}}
                 </td>
-                <td>
+                <td style='border: 1px solid purple'>
                     {{option.option_price}}
                 </td>
-                <td>
+                <td style='border: 1px solid purple'>
                     {{option.volatility}}
                 </td>
-                <td>
+                <td style='border: 1px solid purple'>
                     {{option.description}}
                 </td>
         </tr>
