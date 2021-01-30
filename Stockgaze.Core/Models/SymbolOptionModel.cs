@@ -109,7 +109,7 @@ namespace Stockgaze.Core.Models
         public double Volatility
         {
             get => m_volatility;
-            set => SetProperty(ref m_volatility, value);
+            set => SetProperty(ref m_volatility, Math.Round(value,2));
         }
 
         public double Vwap
@@ -118,7 +118,7 @@ namespace Stockgaze.Core.Models
             set => SetProperty(ref m_vwap, value);
         }
 
-        public double Return => OptionPrice / StockPrice;
+        public double Return => Math.Round(OptionPrice / StockPrice, 2);
 
         public ulong Volume
         {

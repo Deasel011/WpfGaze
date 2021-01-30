@@ -153,6 +153,7 @@
         <Link>QuestradeAPI.Net.dll</Link>
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
+      <Content Include="Emails\testFile.html" />
     </ItemGroup>
     <ItemGroup>
       <None Include="packages.config" />

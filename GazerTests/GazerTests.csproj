@@ -38,8 +38,8 @@
           <HintPath>..\packages\Prism.Core.7.2.0.1422\lib\net45\Prism.dll</HintPath>
           <Private>True</Private>
         </Reference>
-        <Reference Include="QuestradeAPI.Net, Version=1.1.1.19, Culture=neutral, PublicKeyToken=bd128b41e40ab322">
-          <HintPath>..\..\..\..\..\QuestradeAPI\CSharp\QuestradeAPI.Net.dll</HintPath>
+        <Reference Include="QuestradeAPI.Net, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bd128b41e40ab322">
+          <HintPath>..\Dependencies\QuestradeAPI.Net.dll</HintPath>
         </Reference>
         <Reference Include="System" />
         <Reference Include="System.Core" />

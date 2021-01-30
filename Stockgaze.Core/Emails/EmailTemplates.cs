@@ -18,13 +18,16 @@ namespace Stockgaze.Core.Emails
 
         #region templates
         private const string OptionTemplate =
-            @"<table>
+            @"
+<style>
+    table {border: 1px solid purple; border-collapse: collapse;}
+    td   {border: 1px solid purple}
+    th    {border: 1px solid purple}
+</style>
+<table>
         <tr>
                 <th>
                     Symbol
-                </th>
-                <th>
-                    Exchange
                 </th>
                 <th>
                     ExpiryDate
@@ -50,18 +53,12 @@ namespace Stockgaze.Core.Emails
                 <th>
                     Description
                 </th>
-                <th>
-                    OptionType
-                </th>
         </tr>
         
             {{ for option in options }}
         <tr>
                 <td>
                     {{option.symbol}}
-                </td>
-                <td>
-                    {{option.exchange}}
                 </td>
                 <td>
                     {{option.expiry_date}}
@@ -87,9 +84,6 @@ namespace Stockgaze.Core.Emails
                 <td>
                     {{option.description}}
                 </td>
-                <td>
-                    {{option.option_type}}
-                </td>
         </tr>
             {{end}}
         </table>
@@ -101,7 +95,7 @@ namespace Stockgaze.Core.Emails
 
         public static string FillOptionTemplate(string filter, List<SymbolOptionModel> optionList)
         {
-            IEnumerable<SymbolOptionModel> options = optionList.OrderByDescending(o => o.Return);
+            IEnumerable<SymbolOptionModel> options = optionList.Where(option => option.Return >= 0.05).OrderByDescending(o => o.Return).ToList();
             var template = Template.Parse(OptionTemplate);
             return template.Render(new {
                 Options = options,
