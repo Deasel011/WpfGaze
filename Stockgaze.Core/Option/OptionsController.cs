@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using Prism.Mvvm;
 using Questrade.BusinessObjects.Entities;
+using Stockgaze.Core.Helpers;
 using Stockgaze.Core.Models;
 using Stockgaze.Core.Services;
 using Stockgaze.Core.WPFTools;
@@ -347,36 +348,5 @@ namespace Stockgaze.Core.Option
             (FilterMinVolume == 0 || option.Volume >= Convert.ToUInt64(FilterMinVolume))
             ).ToList(); }
 
-    }
-
-    public class ProgressReporter: BindableBase
-    {
-
-        public ProgressReporter(int totalElements)
-        {
-            m_totalElements = totalElements;
-        }
-
-        private ulong m_progress;
-
-        private readonly int m_totalElements;
-
-        public ulong Progress
-        {
-            get => m_progress;
-            set => SetProperty(ref m_progress, value);
-        }
-
-        public void SetProgress(int index)
-        {
-            try
-            {
-                Progress = Convert.ToUInt64(Math.Round((double)index / (double)m_totalElements * 100));
-            }
-            catch (OverflowException e)
-            {
-                //SUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUP
-            }
-        }
     }
 }

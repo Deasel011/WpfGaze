@@ -113,9 +113,11 @@
         <Compile Include="ConfigFile.cs" />
         <Compile Include="Converters\BoolToStatusColorConverter.cs" />
         <Compile Include="Converters\NotBooleanConverter.cs" />
+        <Compile Include="Dividend\DividendController.cs" />
         <Compile Include="Emails\EmailTemplates.cs" />
         <Compile Include="Enums\TaskType.cs" />
         <Compile Include="GazerController.cs" />
+        <Compile Include="Helpers\ProgressReporter.cs" />
         <Compile Include="Login\QuestradeAccountConfigFile.cs" />
         <Compile Include="Login\QuestradeAccountManager.cs" />
         <Compile Include="Login\QuestradeLoginDialogVM.cs" />
@@ -123,6 +125,7 @@
         <Compile Include="Manager\QuestradeSymbolDataManager.cs" />
         <Compile Include="Manager\QuestradeSymbolIdManager.cs" />
         <Compile Include="Manager\SchedulingManager.cs" />
+        <Compile Include="Models\DividendModel.cs" />
         <Compile Include="Models\SymbolOptionModel.cs" />
         <Compile Include="Option\OptionControllerConfig.cs" />
         <Compile Include="Option\OptionIdFilterBindableWrapper.cs" />

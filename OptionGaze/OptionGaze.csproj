@@ -112,6 +112,10 @@
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
         </ApplicationDefinition>
+        <Compile Include="Dividend\DividendUserControl.xaml.cs">
+          <DependentUpon>DividendUserControl.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Dividend\DividendViewModel.cs" />
         <Compile Include="Pipelines\PipelinesUserControl.xaml.cs">
           <DependentUpon>PipelinesUserControl.xaml</DependentUpon>
         </Compile>
@@ -121,6 +125,7 @@
         <Compile Include="Synchronization\SynchronizationUserControl.xaml.cs">
           <DependentUpon>SynchronizationUserControl.xaml</DependentUpon>
         </Compile>
+        <Page Include="Dividend\DividendUserControl.xaml" />
         <Page Include="Login\QuestradeLogin.xaml" />
         <Page Include="MainWindow.xaml">
             <Generator>MSBuild:Compile</Generator>

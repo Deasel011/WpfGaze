@@ -16,7 +16,7 @@ namespace OptionGaze.Option
     public partial class OptionsUserControl : UserControl
     {
 
-        public OptionsController OptionsController { get; set; }
+        public OptionsController OptionsController { get; }
 
         public OptionsUserControl()
         {

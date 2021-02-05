@@ -10,7 +10,6 @@ using Questrade.BusinessObjects.Entities;
 
 namespace Stockgaze.Core.Models
 {
-
     public class SymbolOptionModel : BindableBase
     {
 

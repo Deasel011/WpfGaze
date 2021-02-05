@@ -8,6 +8,7 @@
         xmlns:synchronization="clr-namespace:OptionGaze.Synchronization"
         xmlns:core="clr-namespace:Stockgaze.Core;assembly=Stockgaze.Core"
         xmlns:converters="clr-namespace:Stockgaze.Core.Converters;assembly=Stockgaze.Core"
+        xmlns:dividend="clr-namespace:OptionGaze.Dividend"
         mc:Ignorable="d"
         Title="Stockgaze"
         d:DesignHeight="500" d:DesignWidth="800"
@@ -33,6 +34,9 @@
             </TabItem>
             <TabItem Header="Option" IsEnabled="{Binding QuestradeAccountManager.IsConnected}">
                 <option:OptionsUserControl />
+            </TabItem>
+            <TabItem Header="Dividend" IsEnabled="{Binding QuestradeAccountManager.IsConnected}">
+                <dividend:DividendUserControl />
             </TabItem>
             <TabItem Header="Synchronization" IsEnabled="{Binding QuestradeAccountManager.IsConnected}">
                 <synchronization:SynchronizationUserControl />

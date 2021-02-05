@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Stockgaze.Core.Helpers;
 using Stockgaze.Core.Login;
 using Stockgaze.Core.Option;
 
@@ -46,7 +47,7 @@ namespace Stockgaze.Core.Services
             while (await SearchPage(searchParameters, offset, requestId))
             {
                 offset += OffsetIncrement;
-                progressReport.SetProgress(Convert.ToInt32(offset));
+                progressReport?.SetProgress(Convert.ToInt32(offset));
             }
 
 
